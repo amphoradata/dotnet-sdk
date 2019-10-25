@@ -1,6 +1,0 @@
-packageName: AmphoraData.Client
-packageVersion: 0.0.2
-netCoreProjectFile: true
-targetFramework: netstandard2.0
-optionalAssemblyInfo: false
-packageGuid: 05C8745C-A95B-4A10-ADE4-C36A66043FC4

@@ -1,0 +1,34 @@
+trigger:
+  branches:
+    include:
+      - master
+
+resources:
+- repo: self
+
+variables:
+  - name: hello
+    value: world
+
+
+stages:
+- stage: Main
+  displayName: Build image
+  jobs:  
+  - job: Publish
+    displayName: Publish NuGet Package
+    pool:
+      vmImage: 'ubuntu-latest'
+    steps:
+    - script: dotnet build
+      displayName: Build the sln
+    - script: ./pack.sh
+      displayName: Pack the NuGet
+    - task: NuGetCommand@2
+      displayName: 'nuget push'
+      inputs:
+        command: 'push'
+        feedsToUse: 'select'
+        packagesToPush: 'client/bin/**.*.nupkg'
+        versioningScheme: 'off'
+        allowPackageConflicts: false

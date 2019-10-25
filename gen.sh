@@ -1,3 +1,3 @@
 #!/bin/bash
 
-docker-compose run generator
+dotnet run --project generator

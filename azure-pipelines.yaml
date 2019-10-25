@@ -24,11 +24,11 @@ stages:
       displayName: Build the sln
     - script: ./pack.sh
       displayName: Pack the NuGet
-    - task: NuGetCommand@2
-      displayName: 'nuget push'
-      inputs:
-        command: 'push'
-        feedsToUse: 'select'
-        packagesToPush: 'client/bin/**.*.nupkg'
-        versioningScheme: 'off'
-        allowPackageConflicts: false
+    # - task: NuGetCommand@2
+    #   displayName: 'nuget push'
+    #   inputs:
+    #     command: 'push'
+    #     feedsToUse: 'select'
+    #     packagesToPush: 'client/bin/**.*.nupkg'
+    #     versioningScheme: 'off'
+    #     allowPackageConflicts: false

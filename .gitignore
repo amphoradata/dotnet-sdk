@@ -1,1 +1,5 @@
 **/*.DS_Store
+client/bin/
+client/obj/
+generator/bin
+generator/obj

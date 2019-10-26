@@ -3,3 +3,5 @@ client/bin/
 client/obj/
 generator/bin
 generator/obj
+sample/bin
+sample/obj

@@ -1,8 +1,0 @@
-/Users/rian/src/github.com/amphoradata/dotnet-sdk/client/obj/Debug/netstandard2.0/client.csprojAssemblyReference.cache
-/Users/rian/src/github.com/amphoradata/dotnet-sdk/client/obj/Debug/netstandard2.0/client.AssemblyInfoInputs.cache
-/Users/rian/src/github.com/amphoradata/dotnet-sdk/client/obj/Debug/netstandard2.0/client.AssemblyInfo.cs
-/Users/rian/src/github.com/amphoradata/dotnet-sdk/client/bin/Debug/netstandard2.0/client.deps.json
-/Users/rian/src/github.com/amphoradata/dotnet-sdk/client/bin/Debug/netstandard2.0/client.dll
-/Users/rian/src/github.com/amphoradata/dotnet-sdk/client/bin/Debug/netstandard2.0/client.pdb
-/Users/rian/src/github.com/amphoradata/dotnet-sdk/client/obj/Debug/netstandard2.0/client.dll
-/Users/rian/src/github.com/amphoradata/dotnet-sdk/client/obj/Debug/netstandard2.0/client.pdb

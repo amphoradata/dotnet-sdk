@@ -8,4 +8,4 @@ The code in `/client` was produced via [NSwag](https://github.com/RicoSuter/NSwa
 
 ## Sample
 
-Check out the [sample here](sample/program.cs).
+Check out the [sample here](sample/Program.cs).

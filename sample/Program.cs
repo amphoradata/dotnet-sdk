@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
@@ -12,6 +13,9 @@ namespace sample
         static async Task Main(string[] args)
         {
             Console.WriteLine("Starting sample");
+            
+            // AUTHENTICATE
+
             var authClient = new AuthenticationClient(httpClient);
             var user = new TokenRequest
             {
@@ -24,12 +28,21 @@ namespace sample
             httpClient.DefaultRequestHeaders.Authorization = 
                 new AuthenticationHeaderValue("Bearer", token);
 
+            // WORK WITH USERS
 
             var userClient = new UsersClient(httpClient);
-            Console.WriteLine("Reading self...");
             var self = await userClient.ReadSelfAsync();
-
             Console.WriteLine($"Hello {self.FullName}");
+
+            // SEARCH FOR AMPHORAE
+            var search = new SearchClient(httpClient);
+            var myAmphorae = await search.SearchAmphoraeByCreatorAsync(self.UserName);
+            Console.WriteLine($"You own {myAmphorae.Count} Amphorae");
+
+            foreach(var a in myAmphorae)
+            {
+                Console.WriteLine($"'{a.Name}' costs ${a.Price}"); 
+            }
         }
     }
 }

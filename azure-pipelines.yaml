@@ -14,13 +14,13 @@ variables:
 stages:
 - stage: Main
   displayName: Build image
-  variables:
-    group: nuget
   jobs:  
   - job: Publish
     displayName: Publish NuGet Package
     pool:
       vmImage: 'ubuntu-latest'
+    variables:
+      group: nuget
     steps:
     - script: dotnet build
       displayName: Build the sln

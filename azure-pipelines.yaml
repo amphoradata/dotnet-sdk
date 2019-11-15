@@ -14,6 +14,8 @@ variables:
 stages:
 - stage: Main
   displayName: Build image
+  variables:
+    group: nuget
   jobs:  
   - job: Publish
     displayName: Publish NuGet Package
@@ -24,11 +26,6 @@ stages:
       displayName: Build the sln
     - script: ./pack.sh
       displayName: Pack the NuGet
-    # - task: NuGetCommand@2
-    #   displayName: 'nuget push'
-    #   inputs:
-    #     command: 'push'
-    #     feedsToUse: 'select'
-    #     packagesToPush: 'client/bin/**.*.nupkg'
-    #     versioningScheme: 'off'
-    #     allowPackageConflicts: false
+    - script: dotnet nuget push client/bin/Release/*.nupkg -k $API_KEY -s https://api.nuget.org/v3/index.json
+      env:
+        API_KEY: $(NugetApiKey)

@@ -1,3 +1,3 @@
 #!/bin/bash
 
-dotnet pack client/
+dotnet pack -c Release client/

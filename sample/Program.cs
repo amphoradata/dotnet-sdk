@@ -13,6 +13,7 @@ namespace sample
         static async Task Main(string[] args)
         {
             Console.WriteLine("Starting sample");
+            var apiVersion = "0"; // use this for backwards compatibility
             
             // AUTHENTICATE
 
@@ -22,7 +23,7 @@ namespace sample
                 Username = "", // REPLACE THESE
                 Password = ""
             };
-            var token = await authClient.RequestTokenAsync(user);
+            var token = await authClient.RequestTokenAsync(apiVersion, user);
             Console.WriteLine("Got a token");
 
             httpClient.DefaultRequestHeaders.Authorization = 
@@ -31,12 +32,12 @@ namespace sample
             // WORK WITH USERS
 
             var userClient = new UsersClient(httpClient);
-            var self = await userClient.ReadSelfAsync();
+            var self = await userClient.ReadSelfAsync(apiVersion);
             Console.WriteLine($"Hello {self.FullName}");
 
             // SEARCH FOR AMPHORAE
             var search = new SearchClient(httpClient);
-            var myAmphorae = await search.SearchAmphoraeByCreatorAsync(self.UserName);
+            var myAmphorae = await search.SearchAmphoraeByCreatorAsync(self.UserName, apiVersion);
             Console.WriteLine($"You own {myAmphorae.Count} Amphorae");
 
             foreach(var a in myAmphorae)

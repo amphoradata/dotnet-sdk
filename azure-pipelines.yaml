@@ -25,7 +25,8 @@ stages:
     - script: dotnet build
       displayName: Build the sln
     - script: ./pack.sh
-      displayName: Pack the NuGet
+      displayName: Pack NuGet
     - script: dotnet nuget push client/bin/Release/*.nupkg -k $API_KEY -s https://api.nuget.org/v3/index.json
+      displayName: Push to NuGet
       env:
         API_KEY: $(NugetApiKey)

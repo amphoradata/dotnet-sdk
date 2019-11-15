@@ -1,5 +1,8 @@
-# dotnet-sdk
+![Nuget Badge](https://img.shields.io/nuget/v/AmphoraData.Client)
+
+# Amphora Data DotNet SDK
 A dotnet SDK for the Amphora platform.
+
 
 ## Open API
 

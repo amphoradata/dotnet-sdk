@@ -9,6 +9,7 @@ resources:
 variables:
   - name: hello
     value: world
+  - group: nuget
 
 
 stages:
@@ -19,8 +20,6 @@ stages:
     displayName: Publish NuGet Package
     pool:
       vmImage: 'ubuntu-latest'
-    variables:
-      group: nuget
     steps:
     - script: dotnet build
       displayName: Build the sln

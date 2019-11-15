@@ -1,4 +1,5 @@
 ![Nuget Badge](https://img.shields.io/nuget/v/AmphoraData.Client)
+[![Build Status](https://dev.azure.com/amphoradata/Public/_apis/build/status/amphoradata.dotnet-sdk?branchName=master)](https://dev.azure.com/amphoradata/Public/_build/latest?definitionId=8&branchName=master)
 
 # Amphora Data DotNet SDK
 A dotnet SDK for the Amphora platform.

@@ -23,8 +23,10 @@ namespace sample
                 Username = "", // REPLACE THESE
                 Password = ""
             };
+            var startTime = DateTime.Now;
             var token = await authClient.RequestTokenAsync(apiVersion, user);
-            Console.WriteLine("Got a token");
+            var endTime = DateTime.Now;
+            Console.WriteLine($"Acquiring token took {(endTime - startTime).TotalSeconds}");
 
             httpClient.DefaultRequestHeaders.Authorization = 
                 new AuthenticationHeaderValue("Bearer", token);

@@ -2,6 +2,13 @@ trigger:
   branches:
     include:
       - master
+  paths:
+    include:
+    - generator/*
+    - client/*
+    exclude:
+    - sample/*
+    - README.md
 
 resources:
 - repo: self

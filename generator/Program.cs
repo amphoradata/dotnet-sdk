@@ -27,8 +27,11 @@ namespace generator
             var generator = new CSharpClientGenerator(document, settings);
             var code = generator.GenerateFile();
             var directory = System.IO.Directory.GetCurrentDirectory();
-            System.IO.File.WriteAllText($"{directory}/client/AmphoraClient.cs", code);
-            Console.WriteLine("Done");
+            var filePath = $"{directory}/client/AmphoraClient.cs";
+            System.IO.File.Delete(filePath);
+            Console.WriteLine($"Deleted {filePath}");
+            System.IO.File.WriteAllText(filePath, code);
+            Console.WriteLine($"Wrote {filePath}");
         }
     }
 }

@@ -4429,9 +4429,6 @@ namespace AmphoraData.Client
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.0.27.0 (Newtonsoft.Json v9.0.0.0)")]
     public partial class SearchParameters : SearchParameters2
     {
-        [Newtonsoft.Json.JsonProperty("isForUserAsCreator", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool IsForUserAsCreator { get; set; }
-    
     
     }
     
@@ -4537,6 +4534,9 @@ namespace AmphoraData.Client
     
         [Newtonsoft.Json.JsonProperty("lon", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double? Lon { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("purchaseCount", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? PurchaseCount { get; set; }
     
     
     }

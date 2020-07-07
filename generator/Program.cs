@@ -11,7 +11,7 @@ namespace generator
         {
             System.Net.WebClient wclient = new System.Net.WebClient();
 
-            var document = await OpenApiDocument.FromJsonAsync(wclient.DownloadString("https://beta.amphoradata.com/swagger/v1/swagger.json"));
+            var document = await OpenApiDocument.FromJsonAsync(wclient.DownloadString("https://app.amphoradata.com/swagger/v1/swagger.json"));
 
             wclient.Dispose();
 

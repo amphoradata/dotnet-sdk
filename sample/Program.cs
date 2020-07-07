@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
@@ -14,11 +13,11 @@ namespace sample
         {
             Console.WriteLine("Starting sample");
             var apiVersion = "0"; // use this for backwards compatibility
-            
+
             // AUTHENTICATE
 
             var authClient = new AuthenticationClient(httpClient);
-            var user = new TokenRequest
+            var user = new LoginRequest
             {
                 Username = "", // REPLACE THESE
                 Password = ""
@@ -28,7 +27,7 @@ namespace sample
             var endTime = DateTime.Now;
             Console.WriteLine($"Acquiring token took {(endTime - startTime).TotalSeconds}");
 
-            httpClient.DefaultRequestHeaders.Authorization = 
+            httpClient.DefaultRequestHeaders.Authorization =
                 new AuthenticationHeaderValue("Bearer", token);
 
             // WORK WITH USERS
@@ -38,13 +37,13 @@ namespace sample
             Console.WriteLine($"Hello {self.FullName}");
 
             // SEARCH FOR AMPHORAE
-            var search = new SearchClient(httpClient);
-            var myAmphorae = await search.SearchAmphoraeByCreatorAsync(self.UserName, apiVersion);
-            Console.WriteLine($"You own {myAmphorae.Count} Amphorae");
+            var amphoraClient = new AmphoraeClient(httpClient);
+            var myAmphorae = await amphoraClient.ListAsync("self", "created", "0");
+            Console.WriteLine($"You've created {myAmphorae.Count} Amphorae");
 
-            foreach(var a in myAmphorae)
+            foreach (var a in myAmphorae)
             {
-                Console.WriteLine($"'{a.Name}' costs ${a.Price}"); 
+                Console.WriteLine($"'{a.Name}' costs ${a.Price}");
             }
         }
     }

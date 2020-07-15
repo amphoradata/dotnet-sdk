@@ -46,22 +46,20 @@ namespace AmphoraData.Client
         partial void ProcessResponse(System.Net.Http.HttpClient client, System.Net.Http.HttpResponseMessage response);
     
         /// <summary>Creates a new activity.</summary>
-        /// <param name="x_amphoradata_version">API Version Number</param>
         /// <param name="activity">Metadata of the new activity.</param>
         /// <returns>The Activity information.</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<Activity> CreateActivityAsync(string x_amphoradata_version, CreateActivity activity)
+        public System.Threading.Tasks.Task<Activity> CreateActivityAsync(CreateActivity activity)
         {
-            return CreateActivityAsync(x_amphoradata_version, activity, System.Threading.CancellationToken.None);
+            return CreateActivityAsync(activity, System.Threading.CancellationToken.None);
         }
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Creates a new activity.</summary>
-        /// <param name="x_amphoradata_version">API Version Number</param>
         /// <param name="activity">Metadata of the new activity.</param>
         /// <returns>The Activity information.</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<Activity> CreateActivityAsync(string x_amphoradata_version, CreateActivity activity, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<Activity> CreateActivityAsync(CreateActivity activity, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/activities");
@@ -71,8 +69,6 @@ namespace AmphoraData.Client
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    if (x_amphoradata_version != null)
-                        request_.Headers.TryAddWithoutValidation("x-amphoradata-version", ConvertToString(x_amphoradata_version, System.Globalization.CultureInfo.InvariantCulture));
                     var content_ = new System.Net.Http.StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(activity, _settings.Value));
                     content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                     request_.Content = content_;
@@ -125,21 +121,19 @@ namespace AmphoraData.Client
     
         /// <summary>Gets the metadata of an activity.</summary>
         /// <param name="id">The activity Id.</param>
-        /// <param name="x_amphoradata_version">API Version Number</param>
         /// <returns>The Activity information.</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<Activity> ReadActivityAsync(string id, string x_amphoradata_version)
+        public System.Threading.Tasks.Task<Activity> ReadActivityAsync(string id)
         {
-            return ReadActivityAsync(id, x_amphoradata_version, System.Threading.CancellationToken.None);
+            return ReadActivityAsync(id, System.Threading.CancellationToken.None);
         }
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Gets the metadata of an activity.</summary>
         /// <param name="id">The activity Id.</param>
-        /// <param name="x_amphoradata_version">API Version Number</param>
         /// <returns>The Activity information.</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<Activity> ReadActivityAsync(string id, string x_amphoradata_version, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<Activity> ReadActivityAsync(string id, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/activities/{id}");
@@ -150,8 +144,6 @@ namespace AmphoraData.Client
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    if (x_amphoradata_version != null)
-                        request_.Headers.TryAddWithoutValidation("x-amphoradata-version", ConvertToString(x_amphoradata_version, System.Globalization.CultureInfo.InvariantCulture));
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
     
@@ -201,21 +193,19 @@ namespace AmphoraData.Client
     
         /// <summary>Deletes an activity.</summary>
         /// <param name="id">The activity Id.</param>
-        /// <param name="x_amphoradata_version">API Version Number</param>
         /// <returns>The Activity information.</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<FileResponse> DeleteActivityAsync(string id, string x_amphoradata_version)
+        public System.Threading.Tasks.Task<FileResponse> DeleteActivityAsync(string id)
         {
-            return DeleteActivityAsync(id, x_amphoradata_version, System.Threading.CancellationToken.None);
+            return DeleteActivityAsync(id, System.Threading.CancellationToken.None);
         }
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Deletes an activity.</summary>
         /// <param name="id">The activity Id.</param>
-        /// <param name="x_amphoradata_version">API Version Number</param>
         /// <returns>The Activity information.</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<FileResponse> DeleteActivityAsync(string id, string x_amphoradata_version, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<FileResponse> DeleteActivityAsync(string id, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/activities/{id}");
@@ -226,8 +216,6 @@ namespace AmphoraData.Client
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    if (x_amphoradata_version != null)
-                        request_.Headers.TryAddWithoutValidation("x-amphoradata-version", ConvertToString(x_amphoradata_version, System.Globalization.CultureInfo.InvariantCulture));
                     request_.Method = new System.Net.Http.HttpMethod("DELETE");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/octet-stream"));
     
@@ -279,21 +267,19 @@ namespace AmphoraData.Client
     
         /// <summary>Starts a new run of an activity.</summary>
         /// <param name="id">The activity id in which to start a run.</param>
-        /// <param name="x_amphoradata_version">API Version Number</param>
         /// <returns>The Run information.</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<Run> StartRunAsync(string id, string x_amphoradata_version)
+        public System.Threading.Tasks.Task<Run> StartRunAsync(string id)
         {
-            return StartRunAsync(id, x_amphoradata_version, System.Threading.CancellationToken.None);
+            return StartRunAsync(id, System.Threading.CancellationToken.None);
         }
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Starts a new run of an activity.</summary>
         /// <param name="id">The activity id in which to start a run.</param>
-        /// <param name="x_amphoradata_version">API Version Number</param>
         /// <returns>The Run information.</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<Run> StartRunAsync(string id, string x_amphoradata_version, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<Run> StartRunAsync(string id, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/activities/{id}/Runs");
@@ -304,8 +290,6 @@ namespace AmphoraData.Client
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    if (x_amphoradata_version != null)
-                        request_.Headers.TryAddWithoutValidation("x-amphoradata-version", ConvertToString(x_amphoradata_version, System.Globalization.CultureInfo.InvariantCulture));
                     request_.Content = new System.Net.Http.StringContent(string.Empty, System.Text.Encoding.UTF8, "application/json");
                     request_.Method = new System.Net.Http.HttpMethod("POST");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
@@ -357,24 +341,22 @@ namespace AmphoraData.Client
         /// <summary>Updates and completes a run.</summary>
         /// <param name="id">The activity Id.</param>
         /// <param name="runId">The run Id.</param>
-        /// <param name="x_amphoradata_version">API Version Number</param>
         /// <param name="update">Information about the update.</param>
         /// <returns>The Activity information.</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<Run> UpdateRunAsync(string id, string runId, string x_amphoradata_version, UpdateRun update)
+        public System.Threading.Tasks.Task<Run> UpdateRunAsync(string id, string runId, UpdateRun update)
         {
-            return UpdateRunAsync(id, runId, x_amphoradata_version, update, System.Threading.CancellationToken.None);
+            return UpdateRunAsync(id, runId, update, System.Threading.CancellationToken.None);
         }
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Updates and completes a run.</summary>
         /// <param name="id">The activity Id.</param>
         /// <param name="runId">The run Id.</param>
-        /// <param name="x_amphoradata_version">API Version Number</param>
         /// <param name="update">Information about the update.</param>
         /// <returns>The Activity information.</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<Run> UpdateRunAsync(string id, string runId, string x_amphoradata_version, UpdateRun update, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<Run> UpdateRunAsync(string id, string runId, UpdateRun update, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/activities/{id}/Runs/{runId}");
@@ -386,8 +368,6 @@ namespace AmphoraData.Client
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    if (x_amphoradata_version != null)
-                        request_.Headers.TryAddWithoutValidation("x-amphoradata-version", ConvertToString(x_amphoradata_version, System.Globalization.CultureInfo.InvariantCulture));
                     var content_ = new System.Net.Http.StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(update, _settings.Value));
                     content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                     request_.Content = content_;
@@ -442,13 +422,12 @@ namespace AmphoraData.Client
         /// <param name="id">The activity Id.</param>
         /// <param name="runId">The run Id.</param>
         /// <param name="amphoraId">The Id of the Amphora to reference.</param>
-        /// <param name="x_amphoradata_version">API Version Number</param>
         /// <param name="amphoraReference">Information about the reference.</param>
         /// <returns>The reference information.</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<AmphoraReference> ReferenceAmphoraAsync(string id, string runId, string amphoraId, string x_amphoradata_version, AmphoraReference amphoraReference)
+        public System.Threading.Tasks.Task<AmphoraReference> ReferenceAmphoraAsync(string id, string runId, string amphoraId, AmphoraReference amphoraReference)
         {
-            return ReferenceAmphoraAsync(id, runId, amphoraId, x_amphoradata_version, amphoraReference, System.Threading.CancellationToken.None);
+            return ReferenceAmphoraAsync(id, runId, amphoraId, amphoraReference, System.Threading.CancellationToken.None);
         }
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -456,11 +435,10 @@ namespace AmphoraData.Client
         /// <param name="id">The activity Id.</param>
         /// <param name="runId">The run Id.</param>
         /// <param name="amphoraId">The Id of the Amphora to reference.</param>
-        /// <param name="x_amphoradata_version">API Version Number</param>
         /// <param name="amphoraReference">Information about the reference.</param>
         /// <returns>The reference information.</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<AmphoraReference> ReferenceAmphoraAsync(string id, string runId, string amphoraId, string x_amphoradata_version, AmphoraReference amphoraReference, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<AmphoraReference> ReferenceAmphoraAsync(string id, string runId, string amphoraId, AmphoraReference amphoraReference, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/activities/{id}/Runs/{runId}/amphorae/{amphoraId}");
@@ -473,8 +451,6 @@ namespace AmphoraData.Client
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    if (x_amphoradata_version != null)
-                        request_.Headers.TryAddWithoutValidation("x-amphoradata-version", ConvertToString(x_amphoradata_version, System.Globalization.CultureInfo.InvariantCulture));
                     var content_ = new System.Net.Http.StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(amphoraReference, _settings.Value));
                     content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                     request_.Content = content_;
@@ -651,23 +627,21 @@ namespace AmphoraData.Client
     
         /// <summary>Creates a new application.
         /// Applications are external websites that Amphora users can sign in to.</summary>
-        /// <param name="x_amphoradata_version">API Version Number</param>
         /// <param name="application">An application to create.</param>
         /// <returns>The Application information.</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<Application> CreateApplicationAsync(string x_amphoradata_version, CreateApplication application)
+        public System.Threading.Tasks.Task<Application> CreateApplicationAsync(CreateApplication application)
         {
-            return CreateApplicationAsync(x_amphoradata_version, application, System.Threading.CancellationToken.None);
+            return CreateApplicationAsync(application, System.Threading.CancellationToken.None);
         }
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Creates a new application.
         /// Applications are external websites that Amphora users can sign in to.</summary>
-        /// <param name="x_amphoradata_version">API Version Number</param>
         /// <param name="application">An application to create.</param>
         /// <returns>The Application information.</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<Application> CreateApplicationAsync(string x_amphoradata_version, CreateApplication application, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<Application> CreateApplicationAsync(CreateApplication application, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/applications");
@@ -677,8 +651,6 @@ namespace AmphoraData.Client
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    if (x_amphoradata_version != null)
-                        request_.Headers.TryAddWithoutValidation("x-amphoradata-version", ConvertToString(x_amphoradata_version, System.Globalization.CultureInfo.InvariantCulture));
                     var content_ = new System.Net.Http.StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(application, _settings.Value));
                     content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                     request_.Content = content_;
@@ -731,21 +703,19 @@ namespace AmphoraData.Client
     
         /// <summary>Gets an application by Id, if it exists.</summary>
         /// <param name="id">The id of the application to get.</param>
-        /// <param name="x_amphoradata_version">API Version Number</param>
         /// <returns>The Application information.</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<Application> ReadApplicationAsync(string id, string x_amphoradata_version)
+        public System.Threading.Tasks.Task<Application> ReadApplicationAsync(string id)
         {
-            return ReadApplicationAsync(id, x_amphoradata_version, System.Threading.CancellationToken.None);
+            return ReadApplicationAsync(id, System.Threading.CancellationToken.None);
         }
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Gets an application by Id, if it exists.</summary>
         /// <param name="id">The id of the application to get.</param>
-        /// <param name="x_amphoradata_version">API Version Number</param>
         /// <returns>The Application information.</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<Application> ReadApplicationAsync(string id, string x_amphoradata_version, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<Application> ReadApplicationAsync(string id, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/applications/{id}");
@@ -756,8 +726,6 @@ namespace AmphoraData.Client
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    if (x_amphoradata_version != null)
-                        request_.Headers.TryAddWithoutValidation("x-amphoradata-version", ConvertToString(x_amphoradata_version, System.Globalization.CultureInfo.InvariantCulture));
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
     
@@ -807,23 +775,21 @@ namespace AmphoraData.Client
     
         /// <summary>Updates an application by Id, if it exists.</summary>
         /// <param name="id">The id of the application to update.</param>
-        /// <param name="x_amphoradata_version">API Version Number</param>
         /// <param name="application">The information to update (old locations will be deleted).</param>
         /// <returns>The Application information.</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<Application> UpdateApplicationAsync(string id, string x_amphoradata_version, UpdateApplication application)
+        public System.Threading.Tasks.Task<Application> UpdateApplicationAsync(string id, UpdateApplication application)
         {
-            return UpdateApplicationAsync(id, x_amphoradata_version, application, System.Threading.CancellationToken.None);
+            return UpdateApplicationAsync(id, application, System.Threading.CancellationToken.None);
         }
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Updates an application by Id, if it exists.</summary>
         /// <param name="id">The id of the application to update.</param>
-        /// <param name="x_amphoradata_version">API Version Number</param>
         /// <param name="application">The information to update (old locations will be deleted).</param>
         /// <returns>The Application information.</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<Application> UpdateApplicationAsync(string id, string x_amphoradata_version, UpdateApplication application, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<Application> UpdateApplicationAsync(string id, UpdateApplication application, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/applications/{id}");
@@ -834,8 +800,6 @@ namespace AmphoraData.Client
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    if (x_amphoradata_version != null)
-                        request_.Headers.TryAddWithoutValidation("x-amphoradata-version", ConvertToString(x_amphoradata_version, System.Globalization.CultureInfo.InvariantCulture));
                     var content_ = new System.Net.Http.StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(application, _settings.Value));
                     content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                     request_.Content = content_;
@@ -889,22 +853,20 @@ namespace AmphoraData.Client
         /// <summary>Deletes an application.
         /// Must be done by an Organisation administrator.</summary>
         /// <param name="id">The application id to delete.</param>
-        /// <param name="x_amphoradata_version">API Version Number</param>
         /// <returns>200 if successful.</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<Application> DeleteApplicationAsync(string id, string x_amphoradata_version)
+        public System.Threading.Tasks.Task<Application> DeleteApplicationAsync(string id)
         {
-            return DeleteApplicationAsync(id, x_amphoradata_version, System.Threading.CancellationToken.None);
+            return DeleteApplicationAsync(id, System.Threading.CancellationToken.None);
         }
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Deletes an application.
         /// Must be done by an Organisation administrator.</summary>
         /// <param name="id">The application id to delete.</param>
-        /// <param name="x_amphoradata_version">API Version Number</param>
         /// <returns>200 if successful.</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<Application> DeleteApplicationAsync(string id, string x_amphoradata_version, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<Application> DeleteApplicationAsync(string id, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/applications/{id}");
@@ -915,8 +877,6 @@ namespace AmphoraData.Client
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    if (x_amphoradata_version != null)
-                        request_.Headers.TryAddWithoutValidation("x-amphoradata-version", ConvertToString(x_amphoradata_version, System.Globalization.CultureInfo.InvariantCulture));
                     request_.Method = new System.Net.Http.HttpMethod("DELETE");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
     
@@ -1089,22 +1049,20 @@ namespace AmphoraData.Client
         partial void ProcessResponse(System.Net.Http.HttpClient client, System.Net.Http.HttpResponseMessage response);
     
         /// <summary>Returns a JWT (JSON Web Token).</summary>
-        /// <param name="x_amphoradata_version">API Version Number</param>
         /// <param name="request">Token Request Parameters.</param>
         /// <returns>A JWT Token.</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<string> RequestTokenAsync(string x_amphoradata_version, LoginRequest request)
+        public System.Threading.Tasks.Task<string> RequestTokenAsync(LoginRequest request)
         {
-            return RequestTokenAsync(x_amphoradata_version, request, System.Threading.CancellationToken.None);
+            return RequestTokenAsync(request, System.Threading.CancellationToken.None);
         }
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Returns a JWT (JSON Web Token).</summary>
-        /// <param name="x_amphoradata_version">API Version Number</param>
         /// <param name="request">Token Request Parameters.</param>
         /// <returns>A JWT Token.</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<string> RequestTokenAsync(string x_amphoradata_version, LoginRequest request, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<string> RequestTokenAsync(LoginRequest request, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/authentication/request");
@@ -1114,8 +1072,6 @@ namespace AmphoraData.Client
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    if (x_amphoradata_version != null)
-                        request_.Headers.TryAddWithoutValidation("x-amphoradata-version", ConvertToString(x_amphoradata_version, System.Globalization.CultureInfo.InvariantCulture));
                     var content_ = new System.Net.Http.StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(request, _settings.Value));
                     content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                     request_.Content = content_;
@@ -1292,21 +1248,19 @@ namespace AmphoraData.Client
     
         /// <summary>Executes a fuzzy location search.</summary>
         /// <param name="query">Search Text.</param>
-        /// <param name="x_amphoradata_version">API Version Number</param>
         /// <returns>A fuzzy search response.</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<FuzzySearchResponse> LookupLocationAsync(string query, string x_amphoradata_version)
+        public System.Threading.Tasks.Task<FuzzySearchResponse> LookupLocationAsync(string query)
         {
-            return LookupLocationAsync(query, x_amphoradata_version, System.Threading.CancellationToken.None);
+            return LookupLocationAsync(query, System.Threading.CancellationToken.None);
         }
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Executes a fuzzy location search.</summary>
         /// <param name="query">Search Text.</param>
-        /// <param name="x_amphoradata_version">API Version Number</param>
         /// <returns>A fuzzy search response.</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<FuzzySearchResponse> LookupLocationAsync(string query, string x_amphoradata_version, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<FuzzySearchResponse> LookupLocationAsync(string query, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/geo/search/fuzzy?");
@@ -1321,8 +1275,6 @@ namespace AmphoraData.Client
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    if (x_amphoradata_version != null)
-                        request_.Headers.TryAddWithoutValidation("x-amphoradata-version", ConvertToString(x_amphoradata_version, System.Globalization.CultureInfo.InvariantCulture));
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
     
@@ -1494,17 +1446,15 @@ namespace AmphoraData.Client
         partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, System.Text.StringBuilder urlBuilder);
         partial void ProcessResponse(System.Net.Http.HttpClient client, System.Net.Http.HttpResponseMessage response);
     
-        /// <param name="x_amphoradata_version">API Version Number</param>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<FileResponse> GetAsync(string x_amphoradata_version)
+        public System.Threading.Tasks.Task<FileResponse> GetAsync()
         {
-            return GetAsync(x_amphoradata_version, System.Threading.CancellationToken.None);
+            return GetAsync(System.Threading.CancellationToken.None);
         }
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        /// <param name="x_amphoradata_version">API Version Number</param>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<FileResponse> GetAsync(string x_amphoradata_version, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<FileResponse> GetAsync(System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/identity");
@@ -1514,8 +1464,6 @@ namespace AmphoraData.Client
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    if (x_amphoradata_version != null)
-                        request_.Headers.TryAddWithoutValidation("x-amphoradata-version", ConvertToString(x_amphoradata_version, System.Globalization.CultureInfo.InvariantCulture));
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/octet-stream"));
     
@@ -1690,22 +1638,20 @@ namespace AmphoraData.Client
         partial void ProcessResponse(System.Net.Http.HttpClient client, System.Net.Http.HttpResponseMessage response);
     
         /// <summary>Creates a new Organisation. This will assign the logged in user to the organisation.</summary>
-        /// <param name="x_amphoradata_version">API Version Number</param>
         /// <param name="org">Information of the new Organisation.</param>
         /// <returns>The Organisation metadata.</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<Organisation> CreateAsync(string x_amphoradata_version, Organisation org)
+        public System.Threading.Tasks.Task<Organisation> CreateAsync(Organisation org)
         {
-            return CreateAsync(x_amphoradata_version, org, System.Threading.CancellationToken.None);
+            return CreateAsync(org, System.Threading.CancellationToken.None);
         }
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Creates a new Organisation. This will assign the logged in user to the organisation.</summary>
-        /// <param name="x_amphoradata_version">API Version Number</param>
         /// <param name="org">Information of the new Organisation.</param>
         /// <returns>The Organisation metadata.</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<Organisation> CreateAsync(string x_amphoradata_version, Organisation org, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<Organisation> CreateAsync(Organisation org, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/Organisations");
@@ -1715,8 +1661,6 @@ namespace AmphoraData.Client
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    if (x_amphoradata_version != null)
-                        request_.Headers.TryAddWithoutValidation("x-amphoradata-version", ConvertToString(x_amphoradata_version, System.Globalization.CultureInfo.InvariantCulture));
                     var content_ = new System.Net.Http.StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(org, _settings.Value));
                     content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                     request_.Content = content_;
@@ -1769,23 +1713,21 @@ namespace AmphoraData.Client
     
         /// <summary>Updates an organisation.</summary>
         /// <param name="id">Organisation Id.</param>
-        /// <param name="x_amphoradata_version">API Version Number</param>
         /// <param name="org">Organisation Information. All fields are updated.</param>
         /// <returns>The organisation metadaa.</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<FileResponse> UpdateAsync(string id, string x_amphoradata_version, Organisation org)
+        public System.Threading.Tasks.Task<FileResponse> UpdateAsync(string id, Organisation org)
         {
-            return UpdateAsync(id, x_amphoradata_version, org, System.Threading.CancellationToken.None);
+            return UpdateAsync(id, org, System.Threading.CancellationToken.None);
         }
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Updates an organisation.</summary>
         /// <param name="id">Organisation Id.</param>
-        /// <param name="x_amphoradata_version">API Version Number</param>
         /// <param name="org">Organisation Information. All fields are updated.</param>
         /// <returns>The organisation metadaa.</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<FileResponse> UpdateAsync(string id, string x_amphoradata_version, Organisation org, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<FileResponse> UpdateAsync(string id, Organisation org, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/Organisations/{id}");
@@ -1796,8 +1738,6 @@ namespace AmphoraData.Client
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    if (x_amphoradata_version != null)
-                        request_.Headers.TryAddWithoutValidation("x-amphoradata-version", ConvertToString(x_amphoradata_version, System.Globalization.CultureInfo.InvariantCulture));
                     var content_ = new System.Net.Http.StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(org, _settings.Value));
                     content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                     request_.Content = content_;
@@ -1852,21 +1792,19 @@ namespace AmphoraData.Client
     
         /// <summary>Gets an organisation's details.</summary>
         /// <param name="id">Organisation Id.</param>
-        /// <param name="x_amphoradata_version">API Version Number</param>
         /// <returns>The organisation metadata.</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<Organisation> ReadAsync(string id, string x_amphoradata_version)
+        public System.Threading.Tasks.Task<Organisation> ReadAsync(string id)
         {
-            return ReadAsync(id, x_amphoradata_version, System.Threading.CancellationToken.None);
+            return ReadAsync(id, System.Threading.CancellationToken.None);
         }
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Gets an organisation's details.</summary>
         /// <param name="id">Organisation Id.</param>
-        /// <param name="x_amphoradata_version">API Version Number</param>
         /// <returns>The organisation metadata.</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<Organisation> ReadAsync(string id, string x_amphoradata_version, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<Organisation> ReadAsync(string id, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/Organisations/{id}");
@@ -1877,8 +1815,6 @@ namespace AmphoraData.Client
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    if (x_amphoradata_version != null)
-                        request_.Headers.TryAddWithoutValidation("x-amphoradata-version", ConvertToString(x_amphoradata_version, System.Globalization.CultureInfo.InvariantCulture));
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
     
@@ -1928,21 +1864,19 @@ namespace AmphoraData.Client
     
         /// <summary>Deletes an organisation.</summary>
         /// <param name="id">Organisation Id.</param>
-        /// <param name="x_amphoradata_version">API Version Number</param>
         /// <returns>A Message.</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<string> DeleteAsync(string id, string x_amphoradata_version)
+        public System.Threading.Tasks.Task<string> DeleteAsync(string id)
         {
-            return DeleteAsync(id, x_amphoradata_version, System.Threading.CancellationToken.None);
+            return DeleteAsync(id, System.Threading.CancellationToken.None);
         }
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Deletes an organisation.</summary>
         /// <param name="id">Organisation Id.</param>
-        /// <param name="x_amphoradata_version">API Version Number</param>
         /// <returns>A Message.</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<string> DeleteAsync(string id, string x_amphoradata_version, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<string> DeleteAsync(string id, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/Organisations/{id}");
@@ -1953,8 +1887,6 @@ namespace AmphoraData.Client
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    if (x_amphoradata_version != null)
-                        request_.Headers.TryAddWithoutValidation("x-amphoradata-version", ConvertToString(x_amphoradata_version, System.Globalization.CultureInfo.InvariantCulture));
                     request_.Method = new System.Net.Http.HttpMethod("DELETE");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
     
@@ -2004,21 +1936,19 @@ namespace AmphoraData.Client
     
         /// <summary>Gets an organisation's invitations.</summary>
         /// <param name="id">Organisation Id.</param>
-        /// <param name="x_amphoradata_version">API Version Number</param>
         /// <returns>A list of invitations.</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<System.Collections.Generic.ICollection<Invitation>> ReadInvitationsAsync(string id, string x_amphoradata_version)
+        public System.Threading.Tasks.Task<System.Collections.Generic.ICollection<Invitation>> ReadInvitationsAsync(string id)
         {
-            return ReadInvitationsAsync(id, x_amphoradata_version, System.Threading.CancellationToken.None);
+            return ReadInvitationsAsync(id, System.Threading.CancellationToken.None);
         }
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Gets an organisation's invitations.</summary>
         /// <param name="id">Organisation Id.</param>
-        /// <param name="x_amphoradata_version">API Version Number</param>
         /// <returns>A list of invitations.</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<Invitation>> ReadInvitationsAsync(string id, string x_amphoradata_version, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<Invitation>> ReadInvitationsAsync(string id, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/Organisations/{id}/Invitations");
@@ -2029,8 +1959,6 @@ namespace AmphoraData.Client
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    if (x_amphoradata_version != null)
-                        request_.Headers.TryAddWithoutValidation("x-amphoradata-version", ConvertToString(x_amphoradata_version, System.Globalization.CultureInfo.InvariantCulture));
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
     
@@ -2208,12 +2136,11 @@ namespace AmphoraData.Client
         /// <param name="lat">Latitude (center of search area).</param>
         /// <param name="lon">Longitude (center of search area).</param>
         /// <param name="dist">Distance from center of search area (describing a circle).</param>
-        /// <param name="x_amphoradata_version">API Version Number</param>
         /// <returns>A collection of Amphora.</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<System.Collections.Generic.ICollection<BasicAmphora>> SearchAmphoraeAsync(string term, string labels, double? lat, double? lon, double? dist, string x_amphoradata_version)
+        public System.Threading.Tasks.Task<System.Collections.Generic.ICollection<BasicAmphora>> SearchAmphoraeAsync(string term, string labels, double? lat, double? lon, double? dist)
         {
-            return SearchAmphoraeAsync(term, labels, lat, lon, dist, x_amphoradata_version, System.Threading.CancellationToken.None);
+            return SearchAmphoraeAsync(term, labels, lat, lon, dist, System.Threading.CancellationToken.None);
         }
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -2223,10 +2150,9 @@ namespace AmphoraData.Client
         /// <param name="lat">Latitude (center of search area).</param>
         /// <param name="lon">Longitude (center of search area).</param>
         /// <param name="dist">Distance from center of search area (describing a circle).</param>
-        /// <param name="x_amphoradata_version">API Version Number</param>
         /// <returns>A collection of Amphora.</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<BasicAmphora>> SearchAmphoraeAsync(string term, string labels, double? lat, double? lon, double? dist, string x_amphoradata_version, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<BasicAmphora>> SearchAmphoraeAsync(string term, string labels, double? lat, double? lon, double? dist, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/search/amphorae?");
@@ -2257,8 +2183,6 @@ namespace AmphoraData.Client
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    if (x_amphoradata_version != null)
-                        request_.Headers.TryAddWithoutValidation("x-amphoradata-version", ConvertToString(x_amphoradata_version, System.Globalization.CultureInfo.InvariantCulture));
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
     
@@ -2310,12 +2234,11 @@ namespace AmphoraData.Client
         /// <param name="lat">Latitude.</param>
         /// <param name="lon">Longitude.</param>
         /// <param name="dist">Distance from Latitude and Longitude in which to search.</param>
-        /// <param name="x_amphoradata_version">API Version Number</param>
         /// <returns>A collection of Amphora.</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<System.Collections.Generic.ICollection<BasicAmphora>> SearchAmphoraeByLocationAsync(double? lat, double? lon, double? dist, string x_amphoradata_version)
+        public System.Threading.Tasks.Task<System.Collections.Generic.ICollection<BasicAmphora>> SearchAmphoraeByLocationAsync(double? lat, double? lon, double? dist)
         {
-            return SearchAmphoraeByLocationAsync(lat, lon, dist, x_amphoradata_version, System.Threading.CancellationToken.None);
+            return SearchAmphoraeByLocationAsync(lat, lon, dist, System.Threading.CancellationToken.None);
         }
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -2323,10 +2246,9 @@ namespace AmphoraData.Client
         /// <param name="lat">Latitude.</param>
         /// <param name="lon">Longitude.</param>
         /// <param name="dist">Distance from Latitude and Longitude in which to search.</param>
-        /// <param name="x_amphoradata_version">API Version Number</param>
         /// <returns>A collection of Amphora.</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<BasicAmphora>> SearchAmphoraeByLocationAsync(double? lat, double? lon, double? dist, string x_amphoradata_version, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<BasicAmphora>> SearchAmphoraeByLocationAsync(double? lat, double? lon, double? dist, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/search/amphorae/byLocation?");
@@ -2349,8 +2271,6 @@ namespace AmphoraData.Client
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    if (x_amphoradata_version != null)
-                        request_.Headers.TryAddWithoutValidation("x-amphoradata-version", ConvertToString(x_amphoradata_version, System.Globalization.CultureInfo.InvariantCulture));
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
     
@@ -2400,21 +2320,19 @@ namespace AmphoraData.Client
     
         /// <summary>Searches for Amphorae in an Organisation.</summary>
         /// <param name="orgId">Organisation Id.</param>
-        /// <param name="x_amphoradata_version">API Version Number</param>
         /// <returns>A collection of Amphora.</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<System.Collections.Generic.ICollection<BasicAmphora>> SearchAmphoraeByOrganisationAsync(string orgId, string x_amphoradata_version)
+        public System.Threading.Tasks.Task<System.Collections.Generic.ICollection<BasicAmphora>> SearchAmphoraeByOrganisationAsync(string orgId)
         {
-            return SearchAmphoraeByOrganisationAsync(orgId, x_amphoradata_version, System.Threading.CancellationToken.None);
+            return SearchAmphoraeByOrganisationAsync(orgId, System.Threading.CancellationToken.None);
         }
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Searches for Amphorae in an Organisation.</summary>
         /// <param name="orgId">Organisation Id.</param>
-        /// <param name="x_amphoradata_version">API Version Number</param>
         /// <returns>A collection of Amphora.</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<BasicAmphora>> SearchAmphoraeByOrganisationAsync(string orgId, string x_amphoradata_version, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<BasicAmphora>> SearchAmphoraeByOrganisationAsync(string orgId, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/search/amphorae/byOrganisation?");
@@ -2429,8 +2347,6 @@ namespace AmphoraData.Client
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    if (x_amphoradata_version != null)
-                        request_.Headers.TryAddWithoutValidation("x-amphoradata-version", ConvertToString(x_amphoradata_version, System.Globalization.CultureInfo.InvariantCulture));
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
     
@@ -2480,21 +2396,19 @@ namespace AmphoraData.Client
     
         /// <summary>Searches for Organisations with fuzzy search.</summary>
         /// <param name="term">Search Term.</param>
-        /// <param name="x_amphoradata_version">API Version Number</param>
         /// <returns>A collection of Organisations.</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<System.Collections.Generic.ICollection<Organisation>> SearchOrganisationsAsync(string term, string x_amphoradata_version)
+        public System.Threading.Tasks.Task<System.Collections.Generic.ICollection<Organisation>> SearchOrganisationsAsync(string term)
         {
-            return SearchOrganisationsAsync(term, x_amphoradata_version, System.Threading.CancellationToken.None);
+            return SearchOrganisationsAsync(term, System.Threading.CancellationToken.None);
         }
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Searches for Organisations with fuzzy search.</summary>
         /// <param name="term">Search Term.</param>
-        /// <param name="x_amphoradata_version">API Version Number</param>
         /// <returns>A collection of Organisations.</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<Organisation>> SearchOrganisationsAsync(string term, string x_amphoradata_version, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<Organisation>> SearchOrganisationsAsync(string term, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/search/organisations?");
@@ -2509,8 +2423,6 @@ namespace AmphoraData.Client
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    if (x_amphoradata_version != null)
-                        request_.Headers.TryAddWithoutValidation("x-amphoradata-version", ConvertToString(x_amphoradata_version, System.Globalization.CultureInfo.InvariantCulture));
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
     
@@ -2683,31 +2595,44 @@ namespace AmphoraData.Client
         partial void ProcessResponse(System.Net.Http.HttpClient client, System.Net.Http.HttpResponseMessage response);
     
         /// <summary>Returns all Terms of Use.</summary>
-        /// <param name="x_amphoradata_version">API Version Number</param>
+        /// <param name="take">Gets or sets how many files to return.
+        /// Defaults to 64.</param>
+        /// <param name="skip">Gets or sets how many files to skip before returning.
+        /// Defaults to 0.</param>
         /// <returns>A collection of Terms of Use.</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<System.Collections.Generic.ICollection<TermsOfUse>> ListAsync(string x_amphoradata_version)
+        public System.Threading.Tasks.Task<System.Collections.Generic.ICollection<TermsOfUse>> ListAsync(int? take, int? skip)
         {
-            return ListAsync(x_amphoradata_version, System.Threading.CancellationToken.None);
+            return ListAsync(take, skip, System.Threading.CancellationToken.None);
         }
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Returns all Terms of Use.</summary>
-        /// <param name="x_amphoradata_version">API Version Number</param>
+        /// <param name="take">Gets or sets how many files to return.
+        /// Defaults to 64.</param>
+        /// <param name="skip">Gets or sets how many files to skip before returning.
+        /// Defaults to 0.</param>
         /// <returns>A collection of Terms of Use.</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<TermsOfUse>> ListAsync(string x_amphoradata_version, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<TermsOfUse>> ListAsync(int? take, int? skip, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
-            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/TermsOfUse");
+            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/TermsOfUse?");
+            if (take != null) 
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("Take") + "=").Append(System.Uri.EscapeDataString(ConvertToString(take, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (skip != null) 
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("Skip") + "=").Append(System.Uri.EscapeDataString(ConvertToString(skip, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            urlBuilder_.Length--;
     
             var client_ = _httpClient;
             try
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    if (x_amphoradata_version != null)
-                        request_.Headers.TryAddWithoutValidation("x-amphoradata-version", ConvertToString(x_amphoradata_version, System.Globalization.CultureInfo.InvariantCulture));
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
     
@@ -2756,22 +2681,20 @@ namespace AmphoraData.Client
         }
     
         /// <summary>Creates a Terms of Use object.</summary>
-        /// <param name="x_amphoradata_version">API Version Number</param>
         /// <param name="tou">The terms of use to create.</param>
         /// <returns>The terms of use object.</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<TermsOfUse> CreateAsync(string x_amphoradata_version, CreateTermsOfUse tou)
+        public System.Threading.Tasks.Task<TermsOfUse> CreateAsync(CreateTermsOfUse tou)
         {
-            return CreateAsync(x_amphoradata_version, tou, System.Threading.CancellationToken.None);
+            return CreateAsync(tou, System.Threading.CancellationToken.None);
         }
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Creates a Terms of Use object.</summary>
-        /// <param name="x_amphoradata_version">API Version Number</param>
         /// <param name="tou">The terms of use to create.</param>
         /// <returns>The terms of use object.</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<TermsOfUse> CreateAsync(string x_amphoradata_version, CreateTermsOfUse tou, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<TermsOfUse> CreateAsync(CreateTermsOfUse tou, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/TermsOfUse");
@@ -2781,8 +2704,6 @@ namespace AmphoraData.Client
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    if (x_amphoradata_version != null)
-                        request_.Headers.TryAddWithoutValidation("x-amphoradata-version", ConvertToString(x_amphoradata_version, System.Globalization.CultureInfo.InvariantCulture));
                     var content_ = new System.Net.Http.StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(tou, _settings.Value));
                     content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                     request_.Content = content_;
@@ -2834,20 +2755,18 @@ namespace AmphoraData.Client
         }
     
         /// <summary>Returns all Terms of Use.</summary>
-        /// <param name="x_amphoradata_version">API Version Number</param>
         /// <returns>A collection of Terms of Use.</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<TermsOfUse> ReadAsync(string id, string x_amphoradata_version)
+        public System.Threading.Tasks.Task<TermsOfUse> ReadAsync(string id)
         {
-            return ReadAsync(id, x_amphoradata_version, System.Threading.CancellationToken.None);
+            return ReadAsync(id, System.Threading.CancellationToken.None);
         }
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Returns all Terms of Use.</summary>
-        /// <param name="x_amphoradata_version">API Version Number</param>
         /// <returns>A collection of Terms of Use.</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<TermsOfUse> ReadAsync(string id, string x_amphoradata_version, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<TermsOfUse> ReadAsync(string id, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/TermsOfUse/{id}");
@@ -2858,8 +2777,6 @@ namespace AmphoraData.Client
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    if (x_amphoradata_version != null)
-                        request_.Headers.TryAddWithoutValidation("x-amphoradata-version", ConvertToString(x_amphoradata_version, System.Globalization.CultureInfo.InvariantCulture));
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
     
@@ -2909,21 +2826,19 @@ namespace AmphoraData.Client
     
         /// <summary>Deletes a Terms of Use object.</summary>
         /// <param name="id">The terms of use id to delete.</param>
-        /// <param name="x_amphoradata_version">API Version Number</param>
         /// <returns>200 if successful.</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<FileResponse> DeleteAsync(string id, string x_amphoradata_version)
+        public System.Threading.Tasks.Task<FileResponse> DeleteAsync(string id)
         {
-            return DeleteAsync(id, x_amphoradata_version, System.Threading.CancellationToken.None);
+            return DeleteAsync(id, System.Threading.CancellationToken.None);
         }
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Deletes a Terms of Use object.</summary>
         /// <param name="id">The terms of use id to delete.</param>
-        /// <param name="x_amphoradata_version">API Version Number</param>
         /// <returns>200 if successful.</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<FileResponse> DeleteAsync(string id, string x_amphoradata_version, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<FileResponse> DeleteAsync(string id, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/TermsOfUse/{id}");
@@ -2934,8 +2849,6 @@ namespace AmphoraData.Client
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    if (x_amphoradata_version != null)
-                        request_.Headers.TryAddWithoutValidation("x-amphoradata-version", ConvertToString(x_amphoradata_version, System.Globalization.CultureInfo.InvariantCulture));
                     request_.Method = new System.Net.Http.HttpMethod("DELETE");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/octet-stream"));
     
@@ -2987,21 +2900,19 @@ namespace AmphoraData.Client
     
         /// <summary>Accepts a Terms of Use.</summary>
         /// <param name="id">The Terms of Use id.</param>
-        /// <param name="x_amphoradata_version">API Version Number</param>
         /// <returns>200 if accepted.</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<FileResponse> AcceptAsync(string id, string x_amphoradata_version)
+        public System.Threading.Tasks.Task<FileResponse> AcceptAsync(string id)
         {
-            return AcceptAsync(id, x_amphoradata_version, System.Threading.CancellationToken.None);
+            return AcceptAsync(id, System.Threading.CancellationToken.None);
         }
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Accepts a Terms of Use.</summary>
         /// <param name="id">The Terms of Use id.</param>
-        /// <param name="x_amphoradata_version">API Version Number</param>
         /// <returns>200 if accepted.</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<FileResponse> AcceptAsync(string id, string x_amphoradata_version, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<FileResponse> AcceptAsync(string id, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/TermsOfUse/{id}/Accepts");
@@ -3012,8 +2923,6 @@ namespace AmphoraData.Client
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    if (x_amphoradata_version != null)
-                        request_.Headers.TryAddWithoutValidation("x-amphoradata-version", ConvertToString(x_amphoradata_version, System.Globalization.CultureInfo.InvariantCulture));
                     request_.Content = new System.Net.Http.StringContent(string.Empty, System.Text.Encoding.UTF8, "application/octet-stream");
                     request_.Method = new System.Net.Http.HttpMethod("POST");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/octet-stream"));
@@ -3189,20 +3098,18 @@ namespace AmphoraData.Client
         partial void ProcessResponse(System.Net.Http.HttpClient client, System.Net.Http.HttpResponseMessage response);
     
         /// <summary>Get's logged in users information.</summary>
-        /// <param name="x_amphoradata_version">API Version Number</param>
         /// <returns>Your own details.</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<AmphoraUser> ReadSelfAsync(string x_amphoradata_version)
+        public System.Threading.Tasks.Task<AmphoraUser> ReadSelfAsync()
         {
-            return ReadSelfAsync(x_amphoradata_version, System.Threading.CancellationToken.None);
+            return ReadSelfAsync(System.Threading.CancellationToken.None);
         }
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Get's logged in users information.</summary>
-        /// <param name="x_amphoradata_version">API Version Number</param>
         /// <returns>Your own details.</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<AmphoraUser> ReadSelfAsync(string x_amphoradata_version, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<AmphoraUser> ReadSelfAsync(System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/users/self");
@@ -3212,8 +3119,6 @@ namespace AmphoraData.Client
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    if (x_amphoradata_version != null)
-                        request_.Headers.TryAddWithoutValidation("x-amphoradata-version", ConvertToString(x_amphoradata_version, System.Globalization.CultureInfo.InvariantCulture));
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
     
@@ -3262,22 +3167,20 @@ namespace AmphoraData.Client
         }
     
         /// <summary>Creates a new User. Returns the password.</summary>
-        /// <param name="x_amphoradata_version">API Version Number</param>
         /// <param name="user">User parameters.</param>
         /// <returns>The info for the created user.</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<AmphoraUser> CreateAsync(string x_amphoradata_version, CreateAmphoraUser user)
+        public System.Threading.Tasks.Task<AmphoraUser> CreateAsync(CreateAmphoraUser user)
         {
-            return CreateAsync(x_amphoradata_version, user, System.Threading.CancellationToken.None);
+            return CreateAsync(user, System.Threading.CancellationToken.None);
         }
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Creates a new User. Returns the password.</summary>
-        /// <param name="x_amphoradata_version">API Version Number</param>
         /// <param name="user">User parameters.</param>
         /// <returns>The info for the created user.</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<AmphoraUser> CreateAsync(string x_amphoradata_version, CreateAmphoraUser user, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<AmphoraUser> CreateAsync(CreateAmphoraUser user, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/users");
@@ -3287,8 +3190,6 @@ namespace AmphoraData.Client
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    if (x_amphoradata_version != null)
-                        request_.Headers.TryAddWithoutValidation("x-amphoradata-version", ConvertToString(x_amphoradata_version, System.Globalization.CultureInfo.InvariantCulture));
                     var content_ = new System.Net.Http.StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(user, _settings.Value));
                     content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                     request_.Content = content_;
@@ -3464,20 +3365,18 @@ namespace AmphoraData.Client
         partial void ProcessResponse(System.Net.Http.HttpClient client, System.Net.Http.HttpResponseMessage response);
     
         /// <summary>Get's the current server version.</summary>
-        /// <param name="x_amphoradata_version">API Version Number</param>
         /// <returns>The current version string.</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<string> GetCurrentVersionAsync(string x_amphoradata_version)
+        public System.Threading.Tasks.Task<string> GetCurrentVersionAsync()
         {
-            return GetCurrentVersionAsync(x_amphoradata_version, System.Threading.CancellationToken.None);
+            return GetCurrentVersionAsync(System.Threading.CancellationToken.None);
         }
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Get's the current server version.</summary>
-        /// <param name="x_amphoradata_version">API Version Number</param>
         /// <returns>The current version string.</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<string> GetCurrentVersionAsync(string x_amphoradata_version, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<string> GetCurrentVersionAsync(System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/version");
@@ -3487,8 +3386,6 @@ namespace AmphoraData.Client
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    if (x_amphoradata_version != null)
-                        request_.Headers.TryAddWithoutValidation("x-amphoradata-version", ConvertToString(x_amphoradata_version, System.Globalization.CultureInfo.InvariantCulture));
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
     
@@ -3662,21 +3559,19 @@ namespace AmphoraData.Client
     
         /// <summary>Get's an Organisation's account information.</summary>
         /// <param name="id">Organisation Id.</param>
-        /// <param name="x_amphoradata_version">API Version Number</param>
         /// <returns>An Organisation's account metadata.</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<Account> ReadAsync(string id, string x_amphoradata_version)
+        public System.Threading.Tasks.Task<Account> ReadAsync(string id)
         {
-            return ReadAsync(id, x_amphoradata_version, System.Threading.CancellationToken.None);
+            return ReadAsync(id, System.Threading.CancellationToken.None);
         }
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Get's an Organisation's account information.</summary>
         /// <param name="id">Organisation Id.</param>
-        /// <param name="x_amphoradata_version">API Version Number</param>
         /// <returns>An Organisation's account metadata.</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<Account> ReadAsync(string id, string x_amphoradata_version, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<Account> ReadAsync(string id, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/Organisations/{id}/Account");
@@ -3687,8 +3582,6 @@ namespace AmphoraData.Client
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    if (x_amphoradata_version != null)
-                        request_.Headers.TryAddWithoutValidation("x-amphoradata-version", ConvertToString(x_amphoradata_version, System.Globalization.CultureInfo.InvariantCulture));
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
     
@@ -3738,21 +3631,19 @@ namespace AmphoraData.Client
     
         /// <summary>Get's an Organisation's plan information.</summary>
         /// <param name="id">Organisation Id.</param>
-        /// <param name="x_amphoradata_version">API Version Number</param>
         /// <returns>An Organisation's plan.</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<PlanInformation> GetPlanAsync(string id, string x_amphoradata_version)
+        public System.Threading.Tasks.Task<PlanInformation> GetPlanAsync(string id)
         {
-            return GetPlanAsync(id, x_amphoradata_version, System.Threading.CancellationToken.None);
+            return GetPlanAsync(id, System.Threading.CancellationToken.None);
         }
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Get's an Organisation's plan information.</summary>
         /// <param name="id">Organisation Id.</param>
-        /// <param name="x_amphoradata_version">API Version Number</param>
         /// <returns>An Organisation's plan.</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<PlanInformation> GetPlanAsync(string id, string x_amphoradata_version, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<PlanInformation> GetPlanAsync(string id, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/Organisations/{id}/Account/Plan");
@@ -3763,8 +3654,6 @@ namespace AmphoraData.Client
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    if (x_amphoradata_version != null)
-                        request_.Headers.TryAddWithoutValidation("x-amphoradata-version", ConvertToString(x_amphoradata_version, System.Globalization.CultureInfo.InvariantCulture));
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
     
@@ -3938,21 +3827,19 @@ namespace AmphoraData.Client
     
         /// <summary>Get's a list of an Organisation's Terms of Use.</summary>
         /// <param name="id">The Id of the Organisation.</param>
-        /// <param name="x_amphoradata_version">API Version Number</param>
         /// <returns>The Terms.</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<System.Collections.Generic.ICollection<TermsOfUse>> ReadAsync(string id, string x_amphoradata_version)
+        public System.Threading.Tasks.Task<System.Collections.Generic.ICollection<TermsOfUse>> ReadAsync(string id)
         {
-            return ReadAsync(id, x_amphoradata_version, System.Threading.CancellationToken.None);
+            return ReadAsync(id, System.Threading.CancellationToken.None);
         }
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Get's a list of an Organisation's Terms of Use.</summary>
         /// <param name="id">The Id of the Organisation.</param>
-        /// <param name="x_amphoradata_version">API Version Number</param>
         /// <returns>The Terms.</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<TermsOfUse>> ReadAsync(string id, string x_amphoradata_version, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<TermsOfUse>> ReadAsync(string id, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/Organisations/{id}/TermsOfUse");
@@ -3963,8 +3850,6 @@ namespace AmphoraData.Client
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    if (x_amphoradata_version != null)
-                        request_.Headers.TryAddWithoutValidation("x-amphoradata-version", ConvertToString(x_amphoradata_version, System.Globalization.CultureInfo.InvariantCulture));
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
     
@@ -4138,21 +4023,19 @@ namespace AmphoraData.Client
     
         /// <summary>Get's the list of access rules applied to users.</summary>
         /// <param name="id">Amphora Id.</param>
-        /// <param name="x_amphoradata_version">API Version Number</param>
         /// <returns>A list of rules.</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<System.Collections.Generic.ICollection<UserAccessRule>> GetUserRulesAsync(string id, string x_amphoradata_version)
+        public System.Threading.Tasks.Task<System.Collections.Generic.ICollection<UserAccessRule>> GetUserRulesAsync(string id)
         {
-            return GetUserRulesAsync(id, x_amphoradata_version, System.Threading.CancellationToken.None);
+            return GetUserRulesAsync(id, System.Threading.CancellationToken.None);
         }
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Get's the list of access rules applied to users.</summary>
         /// <param name="id">Amphora Id.</param>
-        /// <param name="x_amphoradata_version">API Version Number</param>
         /// <returns>A list of rules.</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<UserAccessRule>> GetUserRulesAsync(string id, string x_amphoradata_version, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<UserAccessRule>> GetUserRulesAsync(string id, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/amphorae/{id}/AccessControls/ForUser");
@@ -4163,8 +4046,6 @@ namespace AmphoraData.Client
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    if (x_amphoradata_version != null)
-                        request_.Headers.TryAddWithoutValidation("x-amphoradata-version", ConvertToString(x_amphoradata_version, System.Globalization.CultureInfo.InvariantCulture));
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
     
@@ -4214,23 +4095,21 @@ namespace AmphoraData.Client
     
         /// <summary>Creates an Access Control rule on this Amphora.</summary>
         /// <param name="id">Amphora Id.</param>
-        /// <param name="x_amphoradata_version">API Version Number</param>
         /// <param name="rule">The rule to create.</param>
         /// <returns>The rule.</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<UserAccessRule> CreateForUserAsync(string id, string x_amphoradata_version, UserAccessRule rule)
+        public System.Threading.Tasks.Task<UserAccessRule> CreateForUserAsync(string id, UserAccessRule rule)
         {
-            return CreateForUserAsync(id, x_amphoradata_version, rule, System.Threading.CancellationToken.None);
+            return CreateForUserAsync(id, rule, System.Threading.CancellationToken.None);
         }
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Creates an Access Control rule on this Amphora.</summary>
         /// <param name="id">Amphora Id.</param>
-        /// <param name="x_amphoradata_version">API Version Number</param>
         /// <param name="rule">The rule to create.</param>
         /// <returns>The rule.</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<UserAccessRule> CreateForUserAsync(string id, string x_amphoradata_version, UserAccessRule rule, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<UserAccessRule> CreateForUserAsync(string id, UserAccessRule rule, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/amphorae/{id}/AccessControls/ForUser");
@@ -4241,8 +4120,6 @@ namespace AmphoraData.Client
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    if (x_amphoradata_version != null)
-                        request_.Headers.TryAddWithoutValidation("x-amphoradata-version", ConvertToString(x_amphoradata_version, System.Globalization.CultureInfo.InvariantCulture));
                     var content_ = new System.Net.Http.StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(rule, _settings.Value));
                     content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                     request_.Content = content_;
@@ -4295,21 +4172,19 @@ namespace AmphoraData.Client
     
         /// <summary>Get's the list of access rules applied to organisations.</summary>
         /// <param name="id">Amphora Id.</param>
-        /// <param name="x_amphoradata_version">API Version Number</param>
         /// <returns>A list of rules.</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<System.Collections.Generic.ICollection<OrganisationAccessRule>> GetOrganisationRulesAsync(string id, string x_amphoradata_version)
+        public System.Threading.Tasks.Task<System.Collections.Generic.ICollection<OrganisationAccessRule>> GetOrganisationRulesAsync(string id)
         {
-            return GetOrganisationRulesAsync(id, x_amphoradata_version, System.Threading.CancellationToken.None);
+            return GetOrganisationRulesAsync(id, System.Threading.CancellationToken.None);
         }
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Get's the list of access rules applied to organisations.</summary>
         /// <param name="id">Amphora Id.</param>
-        /// <param name="x_amphoradata_version">API Version Number</param>
         /// <returns>A list of rules.</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<OrganisationAccessRule>> GetOrganisationRulesAsync(string id, string x_amphoradata_version, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<OrganisationAccessRule>> GetOrganisationRulesAsync(string id, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/amphorae/{id}/AccessControls/ForOrganisation");
@@ -4320,8 +4195,6 @@ namespace AmphoraData.Client
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    if (x_amphoradata_version != null)
-                        request_.Headers.TryAddWithoutValidation("x-amphoradata-version", ConvertToString(x_amphoradata_version, System.Globalization.CultureInfo.InvariantCulture));
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
     
@@ -4371,23 +4244,21 @@ namespace AmphoraData.Client
     
         /// <summary>Creates an Access Control Rule on this Amphora.</summary>
         /// <param name="id">Amphora Id.</param>
-        /// <param name="x_amphoradata_version">API Version Number</param>
         /// <param name="rule">The rule to create.</param>
         /// <returns>The same rule.</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<UserAccessRule> CreateForOrganisationAsync(string id, string x_amphoradata_version, OrganisationAccessRule rule)
+        public System.Threading.Tasks.Task<UserAccessRule> CreateForOrganisationAsync(string id, OrganisationAccessRule rule)
         {
-            return CreateForOrganisationAsync(id, x_amphoradata_version, rule, System.Threading.CancellationToken.None);
+            return CreateForOrganisationAsync(id, rule, System.Threading.CancellationToken.None);
         }
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Creates an Access Control Rule on this Amphora.</summary>
         /// <param name="id">Amphora Id.</param>
-        /// <param name="x_amphoradata_version">API Version Number</param>
         /// <param name="rule">The rule to create.</param>
         /// <returns>The same rule.</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<UserAccessRule> CreateForOrganisationAsync(string id, string x_amphoradata_version, OrganisationAccessRule rule, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<UserAccessRule> CreateForOrganisationAsync(string id, OrganisationAccessRule rule, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/amphorae/{id}/AccessControls/ForOrganisation");
@@ -4398,8 +4269,6 @@ namespace AmphoraData.Client
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    if (x_amphoradata_version != null)
-                        request_.Headers.TryAddWithoutValidation("x-amphoradata-version", ConvertToString(x_amphoradata_version, System.Globalization.CultureInfo.InvariantCulture));
                     var content_ = new System.Net.Http.StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(rule, _settings.Value));
                     content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                     request_.Content = content_;
@@ -4452,21 +4321,19 @@ namespace AmphoraData.Client
     
         /// <summary>Get's the 'for all' rule, if it exists, else an empty 200.</summary>
         /// <param name="id">Amphora Id.</param>
-        /// <param name="x_amphoradata_version">API Version Number</param>
         /// <returns>A rule, if it exists.</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<AllAccessRule> GetForAllRuleAsync(string id, string x_amphoradata_version)
+        public System.Threading.Tasks.Task<AllAccessRule> GetForAllRuleAsync(string id)
         {
-            return GetForAllRuleAsync(id, x_amphoradata_version, System.Threading.CancellationToken.None);
+            return GetForAllRuleAsync(id, System.Threading.CancellationToken.None);
         }
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Get's the 'for all' rule, if it exists, else an empty 200.</summary>
         /// <param name="id">Amphora Id.</param>
-        /// <param name="x_amphoradata_version">API Version Number</param>
         /// <returns>A rule, if it exists.</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<AllAccessRule> GetForAllRuleAsync(string id, string x_amphoradata_version, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<AllAccessRule> GetForAllRuleAsync(string id, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/amphorae/{id}/AccessControls/ForAll");
@@ -4477,8 +4344,6 @@ namespace AmphoraData.Client
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    if (x_amphoradata_version != null)
-                        request_.Headers.TryAddWithoutValidation("x-amphoradata-version", ConvertToString(x_amphoradata_version, System.Globalization.CultureInfo.InvariantCulture));
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
     
@@ -4528,23 +4393,21 @@ namespace AmphoraData.Client
     
         /// <summary>Creates an Access Control Rule for all on this Amphora.</summary>
         /// <param name="id">Amphora Id.</param>
-        /// <param name="x_amphoradata_version">API Version Number</param>
         /// <param name="rule">The rule to create.</param>
         /// <returns>The same rule.</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<AllAccessRule> CreateForAllAsync(string id, string x_amphoradata_version, AllAccessRule rule)
+        public System.Threading.Tasks.Task<AllAccessRule> CreateForAllAsync(string id, AllAccessRule rule)
         {
-            return CreateForAllAsync(id, x_amphoradata_version, rule, System.Threading.CancellationToken.None);
+            return CreateForAllAsync(id, rule, System.Threading.CancellationToken.None);
         }
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Creates an Access Control Rule for all on this Amphora.</summary>
         /// <param name="id">Amphora Id.</param>
-        /// <param name="x_amphoradata_version">API Version Number</param>
         /// <param name="rule">The rule to create.</param>
         /// <returns>The same rule.</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<AllAccessRule> CreateForAllAsync(string id, string x_amphoradata_version, AllAccessRule rule, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<AllAccessRule> CreateForAllAsync(string id, AllAccessRule rule, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/amphorae/{id}/AccessControls/ForAll");
@@ -4555,8 +4418,6 @@ namespace AmphoraData.Client
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    if (x_amphoradata_version != null)
-                        request_.Headers.TryAddWithoutValidation("x-amphoradata-version", ConvertToString(x_amphoradata_version, System.Globalization.CultureInfo.InvariantCulture));
                     var content_ = new System.Net.Http.StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(rule, _settings.Value));
                     content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                     request_.Content = content_;
@@ -4610,22 +4471,20 @@ namespace AmphoraData.Client
         /// <summary>Deletes an Access Control on this Amphora.</summary>
         /// <param name="id">Amphora Id.</param>
         /// <param name="ruleId">The Id of the rule to delete.</param>
-        /// <param name="x_amphoradata_version">API Version Number</param>
         /// <returns>An Empty 200.</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<FileResponse> DeleteAsync(string id, string ruleId, string x_amphoradata_version)
+        public System.Threading.Tasks.Task<FileResponse> DeleteAsync(string id, string ruleId)
         {
-            return DeleteAsync(id, ruleId, x_amphoradata_version, System.Threading.CancellationToken.None);
+            return DeleteAsync(id, ruleId, System.Threading.CancellationToken.None);
         }
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Deletes an Access Control on this Amphora.</summary>
         /// <param name="id">Amphora Id.</param>
         /// <param name="ruleId">The Id of the rule to delete.</param>
-        /// <param name="x_amphoradata_version">API Version Number</param>
         /// <returns>An Empty 200.</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<FileResponse> DeleteAsync(string id, string ruleId, string x_amphoradata_version, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<FileResponse> DeleteAsync(string id, string ruleId, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/amphorae/{id}/AccessControls/{ruleId}");
@@ -4637,8 +4496,6 @@ namespace AmphoraData.Client
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    if (x_amphoradata_version != null)
-                        request_.Headers.TryAddWithoutValidation("x-amphoradata-version", ConvertToString(x_amphoradata_version, System.Globalization.CultureInfo.InvariantCulture));
                     request_.Method = new System.Net.Http.HttpMethod("DELETE");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/octet-stream"));
     
@@ -4813,22 +4670,20 @@ namespace AmphoraData.Client
         partial void ProcessResponse(System.Net.Http.HttpClient client, System.Net.Http.HttpResponseMessage response);
     
         /// <summary>Creates a new empty Amphora in the user's organisation.</summary>
-        /// <param name="x_amphoradata_version">API Version Number</param>
         /// <param name="amphora">Information for the new Amphora.</param>
         /// <returns>A new Amphora.</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<DetailedAmphora> CreateAsync(string x_amphoradata_version, CreateAmphora amphora)
+        public System.Threading.Tasks.Task<DetailedAmphora> CreateAsync(CreateAmphora amphora)
         {
-            return CreateAsync(x_amphoradata_version, amphora, System.Threading.CancellationToken.None);
+            return CreateAsync(amphora, System.Threading.CancellationToken.None);
         }
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Creates a new empty Amphora in the user's organisation.</summary>
-        /// <param name="x_amphoradata_version">API Version Number</param>
         /// <param name="amphora">Information for the new Amphora.</param>
         /// <returns>A new Amphora.</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<DetailedAmphora> CreateAsync(string x_amphoradata_version, CreateAmphora amphora, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<DetailedAmphora> CreateAsync(CreateAmphora amphora, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/amphorae");
@@ -4838,8 +4693,6 @@ namespace AmphoraData.Client
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    if (x_amphoradata_version != null)
-                        request_.Headers.TryAddWithoutValidation("x-amphoradata-version", ConvertToString(x_amphoradata_version, System.Globalization.CultureInfo.InvariantCulture));
                     var content_ = new System.Net.Http.StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(amphora, _settings.Value));
                     content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                     request_.Content = content_;
@@ -4893,22 +4746,28 @@ namespace AmphoraData.Client
         /// <summary>Gets a list of Amphora for yourself or your org, created or purchased by you (or organisation).</summary>
         /// <param name="scope">'self' or 'organisation'. Defaults to self.</param>
         /// <param name="accessType">'created' or 'purchased'. Defaults to created.</param>
-        /// <param name="x_amphoradata_version">API Version Number</param>
+        /// <param name="take">Gets or sets how many files to return.
+        /// Defaults to 64.</param>
+        /// <param name="skip">Gets or sets how many files to skip before returning.
+        /// Defaults to 0.</param>
         /// <returns>A list of Amphora.</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<System.Collections.Generic.ICollection<DetailedAmphora>> ListAsync(string scope, string accessType, string x_amphoradata_version)
+        public System.Threading.Tasks.Task<System.Collections.Generic.ICollection<DetailedAmphora>> ListAsync(string scope, string accessType, int? take, int? skip)
         {
-            return ListAsync(scope, accessType, x_amphoradata_version, System.Threading.CancellationToken.None);
+            return ListAsync(scope, accessType, take, skip, System.Threading.CancellationToken.None);
         }
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Gets a list of Amphora for yourself or your org, created or purchased by you (or organisation).</summary>
         /// <param name="scope">'self' or 'organisation'. Defaults to self.</param>
         /// <param name="accessType">'created' or 'purchased'. Defaults to created.</param>
-        /// <param name="x_amphoradata_version">API Version Number</param>
+        /// <param name="take">Gets or sets how many files to return.
+        /// Defaults to 64.</param>
+        /// <param name="skip">Gets or sets how many files to skip before returning.
+        /// Defaults to 0.</param>
         /// <returns>A list of Amphora.</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<DetailedAmphora>> ListAsync(string scope, string accessType, string x_amphoradata_version, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<DetailedAmphora>> ListAsync(string scope, string accessType, int? take, int? skip, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/amphorae?");
@@ -4920,6 +4779,14 @@ namespace AmphoraData.Client
             {
                 urlBuilder_.Append(System.Uri.EscapeDataString("accessType") + "=").Append(System.Uri.EscapeDataString(ConvertToString(accessType, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
             }
+            if (take != null) 
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("Take") + "=").Append(System.Uri.EscapeDataString(ConvertToString(take, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (skip != null) 
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("Skip") + "=").Append(System.Uri.EscapeDataString(ConvertToString(skip, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
             urlBuilder_.Length--;
     
             var client_ = _httpClient;
@@ -4927,8 +4794,6 @@ namespace AmphoraData.Client
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    if (x_amphoradata_version != null)
-                        request_.Headers.TryAddWithoutValidation("x-amphoradata-version", ConvertToString(x_amphoradata_version, System.Globalization.CultureInfo.InvariantCulture));
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
     
@@ -4978,21 +4843,19 @@ namespace AmphoraData.Client
     
         /// <summary>Gets details of an Amphora by Id.</summary>
         /// <param name="id">Amphora Id.</param>
-        /// <param name="x_amphoradata_version">API Version Number</param>
         /// <returns>The Amphora details.</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<DetailedAmphora> ReadAsync(string id, string x_amphoradata_version)
+        public System.Threading.Tasks.Task<DetailedAmphora> ReadAsync(string id)
         {
-            return ReadAsync(id, x_amphoradata_version, System.Threading.CancellationToken.None);
+            return ReadAsync(id, System.Threading.CancellationToken.None);
         }
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Gets details of an Amphora by Id.</summary>
         /// <param name="id">Amphora Id.</param>
-        /// <param name="x_amphoradata_version">API Version Number</param>
         /// <returns>The Amphora details.</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<DetailedAmphora> ReadAsync(string id, string x_amphoradata_version, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<DetailedAmphora> ReadAsync(string id, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/amphorae/{id}");
@@ -5003,8 +4866,6 @@ namespace AmphoraData.Client
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    if (x_amphoradata_version != null)
-                        request_.Headers.TryAddWithoutValidation("x-amphoradata-version", ConvertToString(x_amphoradata_version, System.Globalization.CultureInfo.InvariantCulture));
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
     
@@ -5054,23 +4915,21 @@ namespace AmphoraData.Client
     
         /// <summary>Updates the details of an Amphora by Id.</summary>
         /// <param name="id">Amphora Id.</param>
-        /// <param name="x_amphoradata_version">API Version Number</param>
         /// <param name="amphora">Information to update. Nulls are NOT ignored.</param>
         /// <returns>The Amphora details.</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<DetailedAmphora> UpdateAsync(string id, string x_amphoradata_version, EditAmphora amphora)
+        public System.Threading.Tasks.Task<DetailedAmphora> UpdateAsync(string id, EditAmphora amphora)
         {
-            return UpdateAsync(id, x_amphoradata_version, amphora, System.Threading.CancellationToken.None);
+            return UpdateAsync(id, amphora, System.Threading.CancellationToken.None);
         }
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Updates the details of an Amphora by Id.</summary>
         /// <param name="id">Amphora Id.</param>
-        /// <param name="x_amphoradata_version">API Version Number</param>
         /// <param name="amphora">Information to update. Nulls are NOT ignored.</param>
         /// <returns>The Amphora details.</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<DetailedAmphora> UpdateAsync(string id, string x_amphoradata_version, EditAmphora amphora, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<DetailedAmphora> UpdateAsync(string id, EditAmphora amphora, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/amphorae/{id}");
@@ -5081,8 +4940,6 @@ namespace AmphoraData.Client
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    if (x_amphoradata_version != null)
-                        request_.Headers.TryAddWithoutValidation("x-amphoradata-version", ConvertToString(x_amphoradata_version, System.Globalization.CultureInfo.InvariantCulture));
                     var content_ = new System.Net.Http.StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(amphora, _settings.Value));
                     content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                     request_.Content = content_;
@@ -5135,21 +4992,19 @@ namespace AmphoraData.Client
     
         /// <summary>Deletes an Amphora.</summary>
         /// <param name="id">Amphora Id.</param>
-        /// <param name="x_amphoradata_version">API Version Number</param>
         /// <returns>A Message.</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<string> DeleteAsync(string id, string x_amphoradata_version)
+        public System.Threading.Tasks.Task<string> DeleteAsync(string id)
         {
-            return DeleteAsync(id, x_amphoradata_version, System.Threading.CancellationToken.None);
+            return DeleteAsync(id, System.Threading.CancellationToken.None);
         }
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Deletes an Amphora.</summary>
         /// <param name="id">Amphora Id.</param>
-        /// <param name="x_amphoradata_version">API Version Number</param>
         /// <returns>A Message.</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<string> DeleteAsync(string id, string x_amphoradata_version, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<string> DeleteAsync(string id, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/amphorae/{id}");
@@ -5160,8 +5015,6 @@ namespace AmphoraData.Client
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    if (x_amphoradata_version != null)
-                        request_.Headers.TryAddWithoutValidation("x-amphoradata-version", ConvertToString(x_amphoradata_version, System.Globalization.CultureInfo.InvariantCulture));
                     request_.Method = new System.Net.Http.HttpMethod("DELETE");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
     
@@ -5335,49 +5188,39 @@ namespace AmphoraData.Client
     
         /// <summary>Lists an Amphora's files.</summary>
         /// <param name="id">Amphora Id.</param>
-        /// <param name="take">Gets or sets how many files to return.
-        /// Defaults to 64.</param>
-        /// <param name="skip">Gets or sets how many files to skip before returning.
-        /// Defaults to 0.</param>
         /// <param name="orderBy">Gets or sets the the orderBy parameter.
         /// Options are Alphabetical or LastModified.</param>
         /// <param name="prefix">Gets or sets a prefix filter for all file names.
         /// Is case sensitive.</param>
-        /// <param name="x_amphoradata_version">API Version Number</param>
+        /// <param name="take">Gets or sets how many files to return.
+        /// Defaults to 64.</param>
+        /// <param name="skip">Gets or sets how many files to skip before returning.
+        /// Defaults to 0.</param>
         /// <returns>A list of file names.</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<System.Collections.Generic.ICollection<string>> ListFilesAsync(string id, int? take, int? skip, string orderBy, string prefix, string x_amphoradata_version)
+        public System.Threading.Tasks.Task<System.Collections.Generic.ICollection<string>> ListFilesAsync(string id, string orderBy, string prefix, int? take, int? skip)
         {
-            return ListFilesAsync(id, take, skip, orderBy, prefix, x_amphoradata_version, System.Threading.CancellationToken.None);
+            return ListFilesAsync(id, orderBy, prefix, take, skip, System.Threading.CancellationToken.None);
         }
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Lists an Amphora's files.</summary>
         /// <param name="id">Amphora Id.</param>
-        /// <param name="take">Gets or sets how many files to return.
-        /// Defaults to 64.</param>
-        /// <param name="skip">Gets or sets how many files to skip before returning.
-        /// Defaults to 0.</param>
         /// <param name="orderBy">Gets or sets the the orderBy parameter.
         /// Options are Alphabetical or LastModified.</param>
         /// <param name="prefix">Gets or sets a prefix filter for all file names.
         /// Is case sensitive.</param>
-        /// <param name="x_amphoradata_version">API Version Number</param>
+        /// <param name="take">Gets or sets how many files to return.
+        /// Defaults to 64.</param>
+        /// <param name="skip">Gets or sets how many files to skip before returning.
+        /// Defaults to 0.</param>
         /// <returns>A list of file names.</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<string>> ListFilesAsync(string id, int? take, int? skip, string orderBy, string prefix, string x_amphoradata_version, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<string>> ListFilesAsync(string id, string orderBy, string prefix, int? take, int? skip, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/amphorae/{id}/files?");
             urlBuilder_.Replace("{id}", System.Uri.EscapeDataString(ConvertToString(id, System.Globalization.CultureInfo.InvariantCulture)));
-            if (take != null) 
-            {
-                urlBuilder_.Append(System.Uri.EscapeDataString("Take") + "=").Append(System.Uri.EscapeDataString(ConvertToString(take, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
-            }
-            if (skip != null) 
-            {
-                urlBuilder_.Append(System.Uri.EscapeDataString("Skip") + "=").Append(System.Uri.EscapeDataString(ConvertToString(skip, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
-            }
             if (orderBy != null) 
             {
                 urlBuilder_.Append(System.Uri.EscapeDataString("OrderBy") + "=").Append(System.Uri.EscapeDataString(ConvertToString(orderBy, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
@@ -5386,6 +5229,14 @@ namespace AmphoraData.Client
             {
                 urlBuilder_.Append(System.Uri.EscapeDataString("Prefix") + "=").Append(System.Uri.EscapeDataString(ConvertToString(prefix, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
             }
+            if (take != null) 
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("Take") + "=").Append(System.Uri.EscapeDataString(ConvertToString(take, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (skip != null) 
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("Skip") + "=").Append(System.Uri.EscapeDataString(ConvertToString(skip, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
             urlBuilder_.Length--;
     
             var client_ = _httpClient;
@@ -5393,8 +5244,6 @@ namespace AmphoraData.Client
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    if (x_amphoradata_version != null)
-                        request_.Headers.TryAddWithoutValidation("x-amphoradata-version", ConvertToString(x_amphoradata_version, System.Globalization.CultureInfo.InvariantCulture));
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
     
@@ -5444,23 +5293,21 @@ namespace AmphoraData.Client
     
         /// <summary>Queries an Amphora's files.</summary>
         /// <param name="id">Amphora Id.</param>
-        /// <param name="x_amphoradata_version">API Version Number</param>
         /// <param name="options">Option for querying the files.</param>
         /// <returns>A list of file names.</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<System.Collections.Generic.ICollection<string>> QueryFilesAsync(string id, string x_amphoradata_version, FileQueryOptions options)
+        public System.Threading.Tasks.Task<System.Collections.Generic.ICollection<string>> QueryFilesAsync(string id, FileQueryOptions options)
         {
-            return QueryFilesAsync(id, x_amphoradata_version, options, System.Threading.CancellationToken.None);
+            return QueryFilesAsync(id, options, System.Threading.CancellationToken.None);
         }
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Queries an Amphora's files.</summary>
         /// <param name="id">Amphora Id.</param>
-        /// <param name="x_amphoradata_version">API Version Number</param>
         /// <param name="options">Option for querying the files.</param>
         /// <returns>A list of file names.</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<string>> QueryFilesAsync(string id, string x_amphoradata_version, FileQueryOptions options, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<string>> QueryFilesAsync(string id, FileQueryOptions options, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/amphorae/{id}/files");
@@ -5471,8 +5318,6 @@ namespace AmphoraData.Client
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    if (x_amphoradata_version != null)
-                        request_.Headers.TryAddWithoutValidation("x-amphoradata-version", ConvertToString(x_amphoradata_version, System.Globalization.CultureInfo.InvariantCulture));
                     var content_ = new System.Net.Http.StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(options, _settings.Value));
                     content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                     request_.Content = content_;
@@ -5526,22 +5371,20 @@ namespace AmphoraData.Client
         /// <summary>Get's the contents of a file. Returns application/octet-stream.</summary>
         /// <param name="id">Amphora Id.</param>
         /// <param name="file">The name of the file.</param>
-        /// <param name="x_amphoradata_version">API Version Number</param>
         /// <returns>The file contents.</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<FileResponse> DownloadFileAsync(string id, string file, string x_amphoradata_version)
+        public System.Threading.Tasks.Task<FileResponse> DownloadFileAsync(string id, string file)
         {
-            return DownloadFileAsync(id, file, x_amphoradata_version, System.Threading.CancellationToken.None);
+            return DownloadFileAsync(id, file, System.Threading.CancellationToken.None);
         }
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Get's the contents of a file. Returns application/octet-stream.</summary>
         /// <param name="id">Amphora Id.</param>
         /// <param name="file">The name of the file.</param>
-        /// <param name="x_amphoradata_version">API Version Number</param>
         /// <returns>The file contents.</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<FileResponse> DownloadFileAsync(string id, string file, string x_amphoradata_version, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<FileResponse> DownloadFileAsync(string id, string file, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/amphorae/{id}/files/{file}");
@@ -5553,8 +5396,6 @@ namespace AmphoraData.Client
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    if (x_amphoradata_version != null)
-                        request_.Headers.TryAddWithoutValidation("x-amphoradata-version", ConvertToString(x_amphoradata_version, System.Globalization.CultureInfo.InvariantCulture));
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/octet-stream"));
     
@@ -5607,22 +5448,20 @@ namespace AmphoraData.Client
         /// <summary>Creates a file. Returns a blob URL to upload to.</summary>
         /// <param name="id">Amphora Id.</param>
         /// <param name="file">The name of the file.</param>
-        /// <param name="x_amphoradata_version">API Version Number</param>
         /// <returns>An object with a blob URL.</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<UploadResponse> CreateFileRequestAsync(string id, string file, string x_amphoradata_version)
+        public System.Threading.Tasks.Task<UploadResponse> CreateFileRequestAsync(string id, string file)
         {
-            return CreateFileRequestAsync(id, file, x_amphoradata_version, System.Threading.CancellationToken.None);
+            return CreateFileRequestAsync(id, file, System.Threading.CancellationToken.None);
         }
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Creates a file. Returns a blob URL to upload to.</summary>
         /// <param name="id">Amphora Id.</param>
         /// <param name="file">The name of the file.</param>
-        /// <param name="x_amphoradata_version">API Version Number</param>
         /// <returns>An object with a blob URL.</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<UploadResponse> CreateFileRequestAsync(string id, string file, string x_amphoradata_version, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<UploadResponse> CreateFileRequestAsync(string id, string file, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/amphorae/{id}/files/{file}");
@@ -5634,8 +5473,6 @@ namespace AmphoraData.Client
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    if (x_amphoradata_version != null)
-                        request_.Headers.TryAddWithoutValidation("x-amphoradata-version", ConvertToString(x_amphoradata_version, System.Globalization.CultureInfo.InvariantCulture));
                     request_.Content = new System.Net.Http.StringContent(string.Empty, System.Text.Encoding.UTF8, "application/json");
                     request_.Method = new System.Net.Http.HttpMethod("POST");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
@@ -5687,22 +5524,20 @@ namespace AmphoraData.Client
         /// <summary>Get's the contents of a file. Returns application/octet-stream.</summary>
         /// <param name="id">Amphora Id.</param>
         /// <param name="file">The name of the file.</param>
-        /// <param name="x_amphoradata_version">API Version Number</param>
         /// <returns>200 if successful.</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<FileResponse> DeleteFileAsync(string id, string file, string x_amphoradata_version)
+        public System.Threading.Tasks.Task<FileResponse> DeleteFileAsync(string id, string file)
         {
-            return DeleteFileAsync(id, file, x_amphoradata_version, System.Threading.CancellationToken.None);
+            return DeleteFileAsync(id, file, System.Threading.CancellationToken.None);
         }
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Get's the contents of a file. Returns application/octet-stream.</summary>
         /// <param name="id">Amphora Id.</param>
         /// <param name="file">The name of the file.</param>
-        /// <param name="x_amphoradata_version">API Version Number</param>
         /// <returns>200 if successful.</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<FileResponse> DeleteFileAsync(string id, string file, string x_amphoradata_version, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<FileResponse> DeleteFileAsync(string id, string file, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/amphorae/{id}/files/{file}");
@@ -5714,8 +5549,6 @@ namespace AmphoraData.Client
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    if (x_amphoradata_version != null)
-                        request_.Headers.TryAddWithoutValidation("x-amphoradata-version", ConvertToString(x_amphoradata_version, System.Globalization.CultureInfo.InvariantCulture));
                     request_.Method = new System.Net.Http.HttpMethod("DELETE");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/octet-stream"));
     
@@ -5765,17 +5598,15 @@ namespace AmphoraData.Client
             }
         }
     
-        /// <param name="x_amphoradata_version">API Version Number</param>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<System.Collections.Generic.IDictionary<string, string>> WriteFileAttributesAsync(string id, string file, string x_amphoradata_version, System.Collections.Generic.IDictionary<string, string> attributes)
+        public System.Threading.Tasks.Task<System.Collections.Generic.IDictionary<string, string>> WriteFileAttributesAsync(string id, string file, System.Collections.Generic.IDictionary<string, string> attributes)
         {
-            return WriteFileAttributesAsync(id, file, x_amphoradata_version, attributes, System.Threading.CancellationToken.None);
+            return WriteFileAttributesAsync(id, file, attributes, System.Threading.CancellationToken.None);
         }
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        /// <param name="x_amphoradata_version">API Version Number</param>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<System.Collections.Generic.IDictionary<string, string>> WriteFileAttributesAsync(string id, string file, string x_amphoradata_version, System.Collections.Generic.IDictionary<string, string> attributes, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<System.Collections.Generic.IDictionary<string, string>> WriteFileAttributesAsync(string id, string file, System.Collections.Generic.IDictionary<string, string> attributes, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/amphorae/{id}/files/{file}/attributes");
@@ -5787,8 +5618,6 @@ namespace AmphoraData.Client
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    if (x_amphoradata_version != null)
-                        request_.Headers.TryAddWithoutValidation("x-amphoradata-version", ConvertToString(x_amphoradata_version, System.Globalization.CultureInfo.InvariantCulture));
                     var content_ = new System.Net.Http.StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(attributes, _settings.Value));
                     content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                     request_.Content = content_;
@@ -5842,22 +5671,20 @@ namespace AmphoraData.Client
         /// <summary>Get's the attributes of a file.</summary>
         /// <param name="id">Amphora Id.</param>
         /// <param name="file">The name of the file.</param>
-        /// <param name="x_amphoradata_version">API Version Number</param>
         /// <returns>The attributes.</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<System.Collections.Generic.IDictionary<string, string>> ReadFileAttributesAsync(string id, string file, string x_amphoradata_version)
+        public System.Threading.Tasks.Task<System.Collections.Generic.IDictionary<string, string>> ReadFileAttributesAsync(string id, string file)
         {
-            return ReadFileAttributesAsync(id, file, x_amphoradata_version, System.Threading.CancellationToken.None);
+            return ReadFileAttributesAsync(id, file, System.Threading.CancellationToken.None);
         }
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Get's the attributes of a file.</summary>
         /// <param name="id">Amphora Id.</param>
         /// <param name="file">The name of the file.</param>
-        /// <param name="x_amphoradata_version">API Version Number</param>
         /// <returns>The attributes.</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<System.Collections.Generic.IDictionary<string, string>> ReadFileAttributesAsync(string id, string file, string x_amphoradata_version, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<System.Collections.Generic.IDictionary<string, string>> ReadFileAttributesAsync(string id, string file, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/amphorae/{id}/files/{file}/attributes");
@@ -5869,8 +5696,6 @@ namespace AmphoraData.Client
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    if (x_amphoradata_version != null)
-                        request_.Headers.TryAddWithoutValidation("x-amphoradata-version", ConvertToString(x_amphoradata_version, System.Globalization.CultureInfo.InvariantCulture));
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
     
@@ -6044,23 +5869,21 @@ namespace AmphoraData.Client
     
         /// <summary>Sets the data quality metrics for this Amphora.</summary>
         /// <param name="id">Amphora Id.</param>
-        /// <param name="x_amphoradata_version">API Version Number</param>
         /// <param name="quality">The data quality metrics.</param>
         /// <returns>The quality metrics.</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<Quality> SetAsync(string id, string x_amphoradata_version, Quality quality)
+        public System.Threading.Tasks.Task<Quality> SetAsync(string id, Quality quality)
         {
-            return SetAsync(id, x_amphoradata_version, quality, System.Threading.CancellationToken.None);
+            return SetAsync(id, quality, System.Threading.CancellationToken.None);
         }
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Sets the data quality metrics for this Amphora.</summary>
         /// <param name="id">Amphora Id.</param>
-        /// <param name="x_amphoradata_version">API Version Number</param>
         /// <param name="quality">The data quality metrics.</param>
         /// <returns>The quality metrics.</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<Quality> SetAsync(string id, string x_amphoradata_version, Quality quality, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<Quality> SetAsync(string id, Quality quality, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/amphorae/{id}/quality");
@@ -6071,8 +5894,6 @@ namespace AmphoraData.Client
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    if (x_amphoradata_version != null)
-                        request_.Headers.TryAddWithoutValidation("x-amphoradata-version", ConvertToString(x_amphoradata_version, System.Globalization.CultureInfo.InvariantCulture));
                     var content_ = new System.Net.Http.StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(quality, _settings.Value));
                     content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                     request_.Content = content_;
@@ -6125,21 +5946,19 @@ namespace AmphoraData.Client
     
         /// <summary>Gets the data quality metrics for this Amphora.</summary>
         /// <param name="id">Amphora Id.</param>
-        /// <param name="x_amphoradata_version">API Version Number</param>
         /// <returns>The quality metrics.</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<Quality> GetAsync(string id, string x_amphoradata_version)
+        public System.Threading.Tasks.Task<Quality> GetAsync(string id)
         {
-            return GetAsync(id, x_amphoradata_version, System.Threading.CancellationToken.None);
+            return GetAsync(id, System.Threading.CancellationToken.None);
         }
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Gets the data quality metrics for this Amphora.</summary>
         /// <param name="id">Amphora Id.</param>
-        /// <param name="x_amphoradata_version">API Version Number</param>
         /// <returns>The quality metrics.</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<Quality> GetAsync(string id, string x_amphoradata_version, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<Quality> GetAsync(string id, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/amphorae/{id}/quality");
@@ -6150,8 +5969,6 @@ namespace AmphoraData.Client
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    if (x_amphoradata_version != null)
-                        request_.Headers.TryAddWithoutValidation("x-amphoradata-version", ConvertToString(x_amphoradata_version, System.Globalization.CultureInfo.InvariantCulture));
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
     
@@ -6325,21 +6142,19 @@ namespace AmphoraData.Client
     
         /// <summary>Get's the signals associated with an Amphora.</summary>
         /// <param name="id">Amphora Id.</param>
-        /// <param name="x_amphoradata_version">API Version Number</param>
         /// <returns>A collection of signals.</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<System.Collections.Generic.ICollection<Signal>> GetSignalsAsync(string id, string x_amphoradata_version)
+        public System.Threading.Tasks.Task<System.Collections.Generic.ICollection<Signal>> GetSignalsAsync(string id)
         {
-            return GetSignalsAsync(id, x_amphoradata_version, System.Threading.CancellationToken.None);
+            return GetSignalsAsync(id, System.Threading.CancellationToken.None);
         }
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Get's the signals associated with an Amphora.</summary>
         /// <param name="id">Amphora Id.</param>
-        /// <param name="x_amphoradata_version">API Version Number</param>
         /// <returns>A collection of signals.</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<Signal>> GetSignalsAsync(string id, string x_amphoradata_version, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<Signal>> GetSignalsAsync(string id, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/amphorae/{id}/signals");
@@ -6350,8 +6165,6 @@ namespace AmphoraData.Client
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    if (x_amphoradata_version != null)
-                        request_.Headers.TryAddWithoutValidation("x-amphoradata-version", ConvertToString(x_amphoradata_version, System.Globalization.CultureInfo.InvariantCulture));
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
     
@@ -6401,23 +6214,21 @@ namespace AmphoraData.Client
     
         /// <summary>Associates a signal with an Amphora. Signal is created if not existing.</summary>
         /// <param name="id">Amphora Id.</param>
-        /// <param name="x_amphoradata_version">API Version Number</param>
         /// <param name="signal">Signal Details.</param>
         /// <returns>Signal metadata.</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<Signal> CreateSignalAsync(string id, string x_amphoradata_version, CreateSignal signal)
+        public System.Threading.Tasks.Task<Signal> CreateSignalAsync(string id, CreateSignal signal)
         {
-            return CreateSignalAsync(id, x_amphoradata_version, signal, System.Threading.CancellationToken.None);
+            return CreateSignalAsync(id, signal, System.Threading.CancellationToken.None);
         }
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Associates a signal with an Amphora. Signal is created if not existing.</summary>
         /// <param name="id">Amphora Id.</param>
-        /// <param name="x_amphoradata_version">API Version Number</param>
         /// <param name="signal">Signal Details.</param>
         /// <returns>Signal metadata.</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<Signal> CreateSignalAsync(string id, string x_amphoradata_version, CreateSignal signal, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<Signal> CreateSignalAsync(string id, CreateSignal signal, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/amphorae/{id}/signals");
@@ -6428,8 +6239,6 @@ namespace AmphoraData.Client
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    if (x_amphoradata_version != null)
-                        request_.Headers.TryAddWithoutValidation("x-amphoradata-version", ConvertToString(x_amphoradata_version, System.Globalization.CultureInfo.InvariantCulture));
                     var content_ = new System.Net.Http.StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(signal, _settings.Value));
                     content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                     request_.Content = content_;
@@ -6483,22 +6292,20 @@ namespace AmphoraData.Client
         /// <summary>Get's the signals associated with an Amphora.</summary>
         /// <param name="id">Amphora Id.</param>
         /// <param name="property">The name or id of the signal property.</param>
-        /// <param name="x_amphoradata_version">API Version Number</param>
         /// <returns>A collection of signals.</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<Signal> GetSignalAsync(string id, string property, string x_amphoradata_version)
+        public System.Threading.Tasks.Task<Signal> GetSignalAsync(string id, string property)
         {
-            return GetSignalAsync(id, property, x_amphoradata_version, System.Threading.CancellationToken.None);
+            return GetSignalAsync(id, property, System.Threading.CancellationToken.None);
         }
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Get's the signals associated with an Amphora.</summary>
         /// <param name="id">Amphora Id.</param>
         /// <param name="property">The name or id of the signal property.</param>
-        /// <param name="x_amphoradata_version">API Version Number</param>
         /// <returns>A collection of signals.</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<Signal> GetSignalAsync(string id, string property, string x_amphoradata_version, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<Signal> GetSignalAsync(string id, string property, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/amphorae/{id}/signals/{property}");
@@ -6510,8 +6317,6 @@ namespace AmphoraData.Client
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    if (x_amphoradata_version != null)
-                        request_.Headers.TryAddWithoutValidation("x-amphoradata-version", ConvertToString(x_amphoradata_version, System.Globalization.CultureInfo.InvariantCulture));
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
     
@@ -6562,24 +6367,22 @@ namespace AmphoraData.Client
         /// <summary>Associates a signal with an Amphora. Signal is created if not existing.</summary>
         /// <param name="id">Amphora Id.</param>
         /// <param name="signalId">Signal Details.</param>
-        /// <param name="x_amphoradata_version">API Version Number</param>
         /// <param name="signal">Signal properties to update.</param>
         /// <returns>Signal metadata.</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<Signal> UpdateSignalAsync(string id, string signalId, string x_amphoradata_version, UpdateSignal signal)
+        public System.Threading.Tasks.Task<Signal> UpdateSignalAsync(string id, string signalId, UpdateSignal signal)
         {
-            return UpdateSignalAsync(id, signalId, x_amphoradata_version, signal, System.Threading.CancellationToken.None);
+            return UpdateSignalAsync(id, signalId, signal, System.Threading.CancellationToken.None);
         }
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Associates a signal with an Amphora. Signal is created if not existing.</summary>
         /// <param name="id">Amphora Id.</param>
         /// <param name="signalId">Signal Details.</param>
-        /// <param name="x_amphoradata_version">API Version Number</param>
         /// <param name="signal">Signal properties to update.</param>
         /// <returns>Signal metadata.</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<Signal> UpdateSignalAsync(string id, string signalId, string x_amphoradata_version, UpdateSignal signal, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<Signal> UpdateSignalAsync(string id, string signalId, UpdateSignal signal, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/amphorae/{id}/signals/{signalId}");
@@ -6591,8 +6394,6 @@ namespace AmphoraData.Client
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    if (x_amphoradata_version != null)
-                        request_.Headers.TryAddWithoutValidation("x-amphoradata-version", ConvertToString(x_amphoradata_version, System.Globalization.CultureInfo.InvariantCulture));
                     var content_ = new System.Net.Http.StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(signal, _settings.Value));
                     content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                     request_.Content = content_;
@@ -6643,17 +6444,15 @@ namespace AmphoraData.Client
             }
         }
     
-        /// <param name="x_amphoradata_version">API Version Number</param>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task UploadSignalAsync(string id, string x_amphoradata_version, System.Collections.Generic.IDictionary<string, object> data)
+        public System.Threading.Tasks.Task UploadSignalAsync(string id, System.Collections.Generic.IDictionary<string, object> data)
         {
-            return UploadSignalAsync(id, x_amphoradata_version, data, System.Threading.CancellationToken.None);
+            return UploadSignalAsync(id, data, System.Threading.CancellationToken.None);
         }
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        /// <param name="x_amphoradata_version">API Version Number</param>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task UploadSignalAsync(string id, string x_amphoradata_version, System.Collections.Generic.IDictionary<string, object> data, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task UploadSignalAsync(string id, System.Collections.Generic.IDictionary<string, object> data, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/amphorae/{id}/signals/values");
@@ -6664,8 +6463,6 @@ namespace AmphoraData.Client
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    if (x_amphoradata_version != null)
-                        request_.Headers.TryAddWithoutValidation("x-amphoradata-version", ConvertToString(x_amphoradata_version, System.Globalization.CultureInfo.InvariantCulture));
                     var content_ = new System.Net.Http.StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(data, _settings.Value));
                     content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                     request_.Content = content_;
@@ -6718,17 +6515,15 @@ namespace AmphoraData.Client
             }
         }
     
-        /// <param name="x_amphoradata_version">API Version Number</param>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task UploadSignal2Async(string id, string x_amphoradata_version, System.Collections.Generic.IDictionary<string, object> data)
+        public System.Threading.Tasks.Task UploadSignal2Async(string id, System.Collections.Generic.IDictionary<string, object> data)
         {
-            return UploadSignal2Async(id, x_amphoradata_version, data, System.Threading.CancellationToken.None);
+            return UploadSignal2Async(id, data, System.Threading.CancellationToken.None);
         }
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        /// <param name="x_amphoradata_version">API Version Number</param>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task UploadSignal2Async(string id, string x_amphoradata_version, System.Collections.Generic.IDictionary<string, object> data, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task UploadSignal2Async(string id, System.Collections.Generic.IDictionary<string, object> data, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/amphorae/{id}/signalValues");
@@ -6739,8 +6534,6 @@ namespace AmphoraData.Client
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    if (x_amphoradata_version != null)
-                        request_.Headers.TryAddWithoutValidation("x-amphoradata-version", ConvertToString(x_amphoradata_version, System.Globalization.CultureInfo.InvariantCulture));
                     var content_ = new System.Net.Http.StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(data, _settings.Value));
                     content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                     request_.Content = content_;
@@ -6793,17 +6586,15 @@ namespace AmphoraData.Client
             }
         }
     
-        /// <param name="x_amphoradata_version">API Version Number</param>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task UploadSignalBatchAsync(string id, string x_amphoradata_version, System.Collections.Generic.IEnumerable<System.Collections.Generic.IDictionary<string, object>> data)
+        public System.Threading.Tasks.Task UploadSignalBatchAsync(string id, System.Collections.Generic.IEnumerable<System.Collections.Generic.IDictionary<string, object>> data)
         {
-            return UploadSignalBatchAsync(id, x_amphoradata_version, data, System.Threading.CancellationToken.None);
+            return UploadSignalBatchAsync(id, data, System.Threading.CancellationToken.None);
         }
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        /// <param name="x_amphoradata_version">API Version Number</param>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task UploadSignalBatchAsync(string id, string x_amphoradata_version, System.Collections.Generic.IEnumerable<System.Collections.Generic.IDictionary<string, object>> data, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task UploadSignalBatchAsync(string id, System.Collections.Generic.IEnumerable<System.Collections.Generic.IDictionary<string, object>> data, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/amphorae/{id}/signals/batchvalues");
@@ -6814,8 +6605,6 @@ namespace AmphoraData.Client
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    if (x_amphoradata_version != null)
-                        request_.Headers.TryAddWithoutValidation("x-amphoradata-version", ConvertToString(x_amphoradata_version, System.Globalization.CultureInfo.InvariantCulture));
                     var content_ = new System.Net.Http.StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(data, _settings.Value));
                     content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                     request_.Content = content_;
@@ -6868,17 +6657,15 @@ namespace AmphoraData.Client
             }
         }
     
-        /// <param name="x_amphoradata_version">API Version Number</param>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task UploadSignalBatch2Async(string id, string x_amphoradata_version, System.Collections.Generic.IEnumerable<System.Collections.Generic.IDictionary<string, object>> data)
+        public System.Threading.Tasks.Task UploadSignalBatch2Async(string id, System.Collections.Generic.IEnumerable<System.Collections.Generic.IDictionary<string, object>> data)
         {
-            return UploadSignalBatch2Async(id, x_amphoradata_version, data, System.Threading.CancellationToken.None);
+            return UploadSignalBatch2Async(id, data, System.Threading.CancellationToken.None);
         }
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        /// <param name="x_amphoradata_version">API Version Number</param>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task UploadSignalBatch2Async(string id, string x_amphoradata_version, System.Collections.Generic.IEnumerable<System.Collections.Generic.IDictionary<string, object>> data, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task UploadSignalBatch2Async(string id, System.Collections.Generic.IEnumerable<System.Collections.Generic.IDictionary<string, object>> data, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/amphorae/{id}/batchSignalValues");
@@ -6889,8 +6676,6 @@ namespace AmphoraData.Client
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    if (x_amphoradata_version != null)
-                        request_.Headers.TryAddWithoutValidation("x-amphoradata-version", ConvertToString(x_amphoradata_version, System.Globalization.CultureInfo.InvariantCulture));
                     var content_ = new System.Net.Http.StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(data, _settings.Value));
                     content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                     request_.Content = content_;
@@ -7069,21 +6854,19 @@ namespace AmphoraData.Client
     
         /// <summary>Purchases an Amphora as the logged in user.</summary>
         /// <param name="id">Amphora Id.</param>
-        /// <param name="x_amphoradata_version">API Version Number</param>
         /// <returns>A Message.</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<string> PurchaseAsync(string id, string x_amphoradata_version)
+        public System.Threading.Tasks.Task<string> PurchaseAsync(string id)
         {
-            return PurchaseAsync(id, x_amphoradata_version, System.Threading.CancellationToken.None);
+            return PurchaseAsync(id, System.Threading.CancellationToken.None);
         }
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Purchases an Amphora as the logged in user.</summary>
         /// <param name="id">Amphora Id.</param>
-        /// <param name="x_amphoradata_version">API Version Number</param>
         /// <returns>A Message.</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<string> PurchaseAsync(string id, string x_amphoradata_version, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<string> PurchaseAsync(string id, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/Amphorae/{id}/Purchases");
@@ -7094,8 +6877,6 @@ namespace AmphoraData.Client
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    if (x_amphoradata_version != null)
-                        request_.Headers.TryAddWithoutValidation("x-amphoradata-version", ConvertToString(x_amphoradata_version, System.Globalization.CultureInfo.InvariantCulture));
                     request_.Content = new System.Net.Http.StringContent(string.Empty, System.Text.Encoding.UTF8, "application/json");
                     request_.Method = new System.Net.Http.HttpMethod("POST");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
@@ -7269,22 +7050,20 @@ namespace AmphoraData.Client
         partial void ProcessResponse(System.Net.Http.HttpClient client, System.Net.Http.HttpResponseMessage response);
     
         /// <summary>Updates the details of an Amphora by Id.</summary>
-        /// <param name="x_amphoradata_version">API Version Number</param>
         /// <param name="query">Time Series query. See https://github.com/microsoft/tsiclient/blob/master/docs/Server.md#functions .</param>
         /// <returns>A Query Result.</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<QueryResultPage> QueryTimeSeriesAsync(string x_amphoradata_version, QueryRequest query)
+        public System.Threading.Tasks.Task<QueryResultPage> QueryTimeSeriesAsync(QueryRequest query)
         {
-            return QueryTimeSeriesAsync(x_amphoradata_version, query, System.Threading.CancellationToken.None);
+            return QueryTimeSeriesAsync(query, System.Threading.CancellationToken.None);
         }
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>Updates the details of an Amphora by Id.</summary>
-        /// <param name="x_amphoradata_version">API Version Number</param>
         /// <param name="query">Time Series query. See https://github.com/microsoft/tsiclient/blob/master/docs/Server.md#functions .</param>
         /// <returns>A Query Result.</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<QueryResultPage> QueryTimeSeriesAsync(string x_amphoradata_version, QueryRequest query, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<QueryResultPage> QueryTimeSeriesAsync(QueryRequest query, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/timeseries/query");
@@ -7294,8 +7073,6 @@ namespace AmphoraData.Client
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    if (x_amphoradata_version != null)
-                        request_.Headers.TryAddWithoutValidation("x-amphoradata-version", ConvertToString(x_amphoradata_version, System.Globalization.CultureInfo.InvariantCulture));
                     var content_ = new System.Net.Http.StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(query, _settings.Value));
                     content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                     request_.Content = content_;
@@ -7477,22 +7254,20 @@ namespace AmphoraData.Client
         partial void ProcessResponse(System.Net.Http.HttpClient client, System.Net.Http.HttpResponseMessage response);
     
         /// <summary>The permission level for each object id in the request.</summary>
-        /// <param name="x_amphoradata_version">API Version Number</param>
         /// <param name="req">A request object containing the list of ids to check.</param>
         /// <returns>A dictionary with permission levels associated to the ids.</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<PermissionsResponse> GetPermissionsAsync(string x_amphoradata_version, PermissionsRequest req)
+        public System.Threading.Tasks.Task<PermissionsResponse> GetPermissionsAsync(PermissionsRequest req)
         {
-            return GetPermissionsAsync(x_amphoradata_version, req, System.Threading.CancellationToken.None);
+            return GetPermissionsAsync(req, System.Threading.CancellationToken.None);
         }
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>The permission level for each object id in the request.</summary>
-        /// <param name="x_amphoradata_version">API Version Number</param>
         /// <param name="req">A request object containing the list of ids to check.</param>
         /// <returns>A dictionary with permission levels associated to the ids.</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<PermissionsResponse> GetPermissionsAsync(string x_amphoradata_version, PermissionsRequest req, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<PermissionsResponse> GetPermissionsAsync(PermissionsRequest req, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/permissions");
@@ -7502,8 +7277,6 @@ namespace AmphoraData.Client
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    if (x_amphoradata_version != null)
-                        request_.Headers.TryAddWithoutValidation("x-amphoradata-version", ConvertToString(x_amphoradata_version, System.Globalization.CultureInfo.InvariantCulture));
                     var content_ = new System.Net.Http.StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(req, _settings.Value));
                     content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                     request_.Content = content_;
@@ -7998,8 +7771,8 @@ namespace AmphoraData.Client
         [Newtonsoft.Json.JsonProperty("targetOrganisationId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string TargetOrganisationId { get; set; }
     
-        [Newtonsoft.Json.JsonProperty("isClaimed", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? IsClaimed { get; set; }
+        [Newtonsoft.Json.JsonProperty("state", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string State { get; set; }
     
     
     }
@@ -8245,7 +8018,23 @@ namespace AmphoraData.Client
     }
     
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.0.27.0 (Newtonsoft.Json v9.0.0.0)")]
-    public partial class FileListOptions 
+    public partial class FileListOptions : PaginatedResponse
+    {
+        /// <summary>Gets or sets the the orderBy parameter.
+        /// Options are Alphabetical or LastModified.</summary>
+        [Newtonsoft.Json.JsonProperty("orderBy", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string OrderBy { get; set; }
+    
+        /// <summary>Gets or sets a prefix filter for all file names.
+        /// Is case sensitive.</summary>
+        [Newtonsoft.Json.JsonProperty("prefix", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Prefix { get; set; }
+    
+    
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.0.27.0 (Newtonsoft.Json v9.0.0.0)")]
+    public abstract partial class PaginatedResponse 
     {
         /// <summary>Gets or sets how many files to return.
         /// Defaults to 64.</summary>
@@ -8256,16 +8045,6 @@ namespace AmphoraData.Client
         /// Defaults to 0.</summary>
         [Newtonsoft.Json.JsonProperty("skip", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public int Skip { get; set; }
-    
-        /// <summary>Gets or sets the the orderBy parameter.
-        /// Options are Alphabetical or LastModified.</summary>
-        [Newtonsoft.Json.JsonProperty("orderBy", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string OrderBy { get; set; }
-    
-        /// <summary>Gets or sets a prefix filter for all file names.
-        /// Is case sensitive.</summary>
-        [Newtonsoft.Json.JsonProperty("prefix", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Prefix { get; set; }
     
     
     }

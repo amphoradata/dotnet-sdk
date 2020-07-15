@@ -12,7 +12,6 @@ namespace sample
         static async Task Main(string[] args)
         {
             Console.WriteLine("Starting sample");
-            var apiVersion = "0"; // use this for backwards compatibility
 
             // AUTHENTICATE
 
@@ -23,23 +22,21 @@ namespace sample
                 Password = ""
             };
             var startTime = DateTime.Now;
-            var token = await authClient.RequestTokenAsync(apiVersion, user);
+            var token = await authClient.RequestTokenAsync(user);
             var endTime = DateTime.Now;
             Console.WriteLine($"Acquiring token took {(endTime - startTime).TotalSeconds}");
 
             httpClient.DefaultRequestHeaders.Authorization =
                 new AuthenticationHeaderValue("Bearer", token);
 
-            // WORK WITH USERS
-
+            // Read your own user data.
             var userClient = new UsersClient(httpClient);
-            var self = await userClient.ReadSelfAsync(apiVersion);
+            var self = await userClient.ReadSelfAsync();
             Console.WriteLine($"Hello {self.FullName}");
 
-            // SEARCH FOR AMPHORAE
             var amphoraClient = new AmphoraeClient(httpClient);
-            var myAmphorae = await amphoraClient.ListAsync("self", "created", "0");
-            Console.WriteLine($"You've created {myAmphorae.Count} Amphorae");
+            // get my first 10 amphora
+            var myAmphorae = await amphoraClient.ListAsync("self", "created", 0, 10);
 
             foreach (var a in myAmphorae)
             {
